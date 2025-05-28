@@ -31,7 +31,7 @@ export default function Player({player, onClick}) {
   return (
         <div onClick={ ()=> onClick && onClick(player)}  className={`${shadow} cursor-pointer select-none player flex flex-col items-center px-2 text-black min-w-20 w-20 h-20 rounded-full  ${player.coor}`}>
             <span className='text-white'>{player.name}</span>
-            <img className='rounded-full  player_img' src={img }  alt={`photo` }/>
+            <img className='rounded-full  player_img' src={img } />
             <span className={`w-6 h-6 rounded-full text-white ${color_rating()} text-center self-end mt-[-10px]`}>{player.rating}</span>
         </div>
   )
