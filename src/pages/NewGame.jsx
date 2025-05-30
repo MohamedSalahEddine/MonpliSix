@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import BottomMenu from '../components/BottomMenu'
 import playersData from "../db_players"
 import Player from '../components/Player'
-export default function Main() {
+import { Link } from 'react-router-dom'
+export default function NewGame() {
 
   
   const [players, setPlayers] = useState(playersData)
@@ -17,11 +18,12 @@ export default function Main() {
   }
 
   return (
-    <div className='container relative flex flex-col justify-between text-white frame m-auto bor'>
+    <div className='container relative flex flex-col justify-evenly text-white frame m-auto bor'>
         <div className='flex items-center justify-between'>
-          <img src="/images/arrow-left-solid.svg" alt="" />
-          <p className='text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => player.selected).length} </p>
-
+          <Link to={"../"}>
+            <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
+          </Link>
+          <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => player.selected).length} </p>
         </div>
         <div className='flex gap-2 py-2 h-fit  overflow-y-hidden overflow-x-scroll'>
           {
@@ -31,7 +33,7 @@ export default function Main() {
           }
 
         </div>
-        <div className='feild relative h-[60vh]'>
+        <div className='feild relative h-[70vh]'>
           {
             players.map(player=>{
               return player.selected && <Player key={player.name} player={player}/>

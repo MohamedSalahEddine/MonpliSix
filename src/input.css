@@ -2,28 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 .bor{
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 .frame{
     padding: 1rem;
-    height: 95vh;
+    height: 100vh;
     background:linear-gradient(130deg, #1B2D37, #5D6E75);
     /* background:linear-gradient(130deg, red, green); */
 }
 
 *{
-    /* border: 1px solid blueviolet; */
+    /* border: 2px solid red; */
 }
 .frame img{
     width: 40px;
+    
 }
 
 .player img{
     width: 50px !important;
 }
 
+.player_history .player_img {
+    width: 120px !important;
+    max-width: none;
+}
+
+.history_middle .player_img{
+    width: 60px !important;
+    max-width: none;
+}
 
 .feild{
     background: url("../public/images/playground.png");
@@ -38,4 +57,20 @@
 
 .feild .player {
     position: absolute;
+}
+
+
+
+.history_middle::before{
+    content: "----------------------معدلك     --  م. المباراة";
+    font-size: 11px;
+}
+
+.game_history .player{
+    border-radius: 50% !important;
+}
+
+
+.icon_left{
+    width: 30px !important;
 }

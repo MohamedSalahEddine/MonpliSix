@@ -1,24 +1,35 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function BottomMenu() {
   return (
-    <div>
+    <div className='w-full absolute bottom-0'>
         <nav>
             <ul className='flex justify-around'>
                 <li>
-                    <img src="/images/star-solid.svg" alt="" />
+                    <Link to="/">
+                        <img src="/images/star-solid.svg" alt="" />
+                    </Link>
                 </li>
                 <li>
-                    <img src="/images/chart-simple-solid.svg" alt="" />
+                    <Link to="/">
+                        <img src="/images/chart-simple-solid.svg" alt="" />
+                    </Link>
                 </li>
                 <li>
-                    <img src="/images/list-solid.svg" alt="" />
+                    <Link to="/spitting">
+                        <img src="/images/list-solid.svg" alt="" />
+                    </Link>
                 </li>
                 <li>
-                    <img src="/images/clock-rotate-left-solid.svg" alt="" />
+                    <Link to="/history">
+                        <img src="/images/clock-rotate-left-solid.svg" alt="" />
+                    </Link>
                 </li>
                 <li>
-                    <img src="/images/circle-plus-solid.svg" alt="" />
+                    <Link to="/newGame">
+                        <img src="/images/circle-plus-solid.svg" alt="" />
+                    </Link>
                 </li>
             </ul>
         </nav>

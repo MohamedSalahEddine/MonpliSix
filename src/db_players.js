@@ -1,4 +1,4 @@
-const players = [
+let players = [
   {
     name: "Adlene",
     img: "adlene",
@@ -7,7 +7,8 @@ const players = [
     rating: 2.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Alla",
@@ -17,7 +18,8 @@ const players = [
     rating: 8.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Aziz",
@@ -27,7 +29,8 @@ const players = [
     rating: 8.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Booba",
@@ -37,7 +40,8 @@ const players = [
     rating: 7.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Chapou",
@@ -47,7 +51,8 @@ const players = [
     rating: 7.9,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Ghani",
@@ -57,7 +62,8 @@ const players = [
     rating: 9.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Hamoudi",
@@ -67,7 +73,8 @@ const players = [
     rating: 7.2,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Jack",
@@ -77,7 +84,8 @@ const players = [
     rating: 7.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Karim",
@@ -87,7 +95,8 @@ const players = [
     rating: 7.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Naps",
@@ -97,7 +106,8 @@ const players = [
     rating: 5.5,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Tarek",
@@ -107,7 +117,8 @@ const players = [
     rating: 8.1,
     status: "invite",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent") // matched taarek
   },
   {
     name: "Tech",
@@ -117,7 +128,8 @@ const players = [
     rating: 4.5,
     status: "permanent",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Tokoto",
@@ -127,7 +139,8 @@ const players = [
     rating: 3.5,
     status: "permanent",
     coor: "top-2 left-2",
-    selected: false
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
     name: "Youssri",
@@ -137,7 +150,8 @@ const players = [
     rating: 7.5,
     status: "permanent",
     coor: "top-[0px] left-[140px]",
-    selected: true
+    selected: false,
+    last_played_date: getDate("default")
   },
   {
     name: "Zak",
@@ -147,79 +161,130 @@ const players = [
     rating: 7.0,
     status: "permanent",
     coor: "top-2 right-2",
-    selected: true
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+
+  // New players
+  {
+    name: "Isam",
+    img: "isam",
+    foot: "d",
+    pos: "md",
+    rating: 5.5,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
   },
   {
-  name: "Lamine",
-  img: "",
-  foot: "d",
-  pos: "at",
-  rating: 5.0,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Houssem",
-  img: "",
-  foot: "d",
-  pos: "md",
-  rating: 6.0,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Alilou",
-  img: "",
-  foot: "d",
-  pos: "gb",
-  rating: 6.5,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Isam",
-  img: "isam",
-  foot: "d",
-  pos: "md",
-  rating: 5.5,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Imad",
-  img: "imad",
-  foot: "d",
-  pos: "at",
-  rating: 7.0,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Patach",
-  img: "patach",
-  foot: "d",
-  pos: "at",
-  rating: 4.5,
-  status: "invite",
-  coor: "top-2 left-2",
-  selected: false
-},
-{
-  name: "Seif",
-  img: "",
-  foot: "d",
-  pos: "at",
-  rating: 4.5,
-  status: "premanent",
-  coor: "top-2 left-2",
-  selected: false
+    name: "Lamine",
+    img: "",
+    foot: "d",
+    pos: "at",
+    rating: 5.5,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Houssem",
+    img: "",
+    foot: "d",
+    pos: "md",
+    rating: 6.0,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Alilou",
+    img: "",
+    foot: "d",
+    pos: "gb",
+    rating: 6.5,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Seif",
+    img: "",
+    foot: "d",
+    pos: "at",
+    rating: 6.8,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Paylou",
+    img: "",
+    foot: "d",
+    pos: "at",
+    rating: 7.3,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Kagawa",
+    img: "",
+    foot: "d",
+    pos: "at",
+    rating: 7.3,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  },
+  {
+    name: "Patach",
+    img: "patach",
+    foot: "d",
+    pos: "at",
+    rating: 7.3,
+    status: "invite",
+    coor: "top-2 left-2",
+    selected: false,
+    last_played_date: getDate("recent")
+  } 
+];
+
+function getDate(type){
+  let today = new Date()
+  today.setDate(today.getDate() - (type === "recent" ?   1 : 14))  
+  return today.toISOString().split("T")[0]
 }
 
-];
+
+
+function playerComparator(player1, player2){
+  if(player1.last_played_date > player2.last_played_date){
+    return -1
+  }else if(player1.last_played_date < player2.last_played_date){
+    return 1
+  }else{
+    if(player1.name > player2.name){
+      return 1
+    }else if(player1.name < player2.name){
+      return -1
+    }else{
+      return 0
+    }
+  }
+  // return player1.name - player2.name
+  
+}
+
+players.sort(playerComparator)
+
+// console.log(players);
+
 
 export default players;
