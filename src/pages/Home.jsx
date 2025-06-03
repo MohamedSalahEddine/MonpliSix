@@ -9,7 +9,7 @@ export default function Home() {
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
         </Link>
         <div className='flex justify-center text-white'>
-            <h1>Tarek ya madama ghlebtek 10</h1>
+            <h1>Tarek ya madama ghlebtekkk 10</h1>
 
         </div>
 

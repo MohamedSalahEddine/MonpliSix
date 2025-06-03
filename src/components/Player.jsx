@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Player({player, onClick, display_rating = true}) {
+export default function Player({player, size = 90, onClick, display_rating = true}) {
   
   const {name, rating, selected, img } = player
   const img_src = img !==""? `/images/joueurs/${img}.jpg` : '/images/camera-solid.svg'
@@ -26,15 +26,30 @@ export default function Player({player, onClick, display_rating = true}) {
       return "bg-black "
     }
   }
+ 
 
   const shadow = selected ? "shadow-md shadow-green-400":""
-
+  // console.log(pad_x);
+  
 
   return (
-        <div onClick={ ()=> onClick && onClick(player)}  className={`${shadow} cursor-pointer  rounded-full min-w-12 select-none player flex flex-col items-center px-2 text-black w-fit h-fit  border-blue-400   ${player.coor}`}>
-            <span style={{fontSize : name.length >5 ?  `14px` : "16px"}} className={'text-white text-center player_name '}>{name}</span>
-            <img className='rounded-full  player_img' src={img_src} alt={'player img'}/>
-            {display_rating &&<span className={`w-6 h-6 rounded-full text-white ${color_rating()} text-center self-end mt-[-15px]`}>{ rating}</span>}
+        <div onClick={ ()=> onClick && onClick(player)} 
+          style={{ width : size , height: size , minHeight : size, minWidth: size}} 
+          // style={{ width : size , height: size, padding : `0px ${pad_x}px`}} 
+          className={`player  flex flex-col items-center  cursor-pointer select-none rounded-full border-blue-400  ${shadow}`}
+          >
+            <span 
+              style={{fontSize : "12px"}} 
+              className={'player_name text-white text-center '}>{name}
+            </span>
+            <img 
+              style={{width :  '70%'}} 
+              // style={{width : `${size}px` , height:`${size}px`}} 
+              className={`player_img rounded-full`} src={img_src} alt={'player img'}
+            />
+            {display_rating &&<span style={{ height: size/3.5, width: size/3.5, 
+                                            //  maxHeight: size/3, maxWidth: size/3
+            }} className={` rounded-full text-white ${color_rating()} flex items-center justify-center self-end mt-[-15px]`}>{ rating}</span>}
         </div>
   )
 }

@@ -3,32 +3,32 @@ import { Link } from 'react-router-dom'
 
 export default function BottomMenu() {
   return (
-    <div className='w-full absolute bottom-0'>
+    <div className='bottom_menu w-full absolute bottom-0'>
         <nav>
-            <ul className='flex justify-around'>
+            <ul className='flex justify-around '>
                 <li>
-                    <Link to="/rating">
-                        <img src="/images/star-solid.svg" alt="" />
+                    <Link to="/rating" className="h-9 w-9 flex items-center justify-center">
+                        <img className='menu_icons' src="/images/star-solid.svg" alt="" />
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
-                        <img src="/images/chart-simple-solid.svg" alt="" />
+                    <Link to="/"  className="h-9 w-9 flex items-center justify-center">
+                        <img className='menu_icons' src="/images/chart-simple-solid.svg" alt="" />
                     </Link>
                 </li>
                 <li>
-                    <Link to="/spitting">
-                        <img src="/images/droplet-solid.svg" alt="" />
+                    <Link to="/spitting"  className="h-9 w-9 flex items-center justify-center">
+                        <img className='menu_icons' src="/images/droplet-solid.svg" alt="" />
                     </Link>
                 </li>
                 <li>
-                    <Link to="/history">
-                        <img src="/images/clock-rotate-left-solid.svg" alt="" />
+                    <Link to="/history"  className="h-9 w-9 flex items-center justify-center">
+                        <img className='menu_icons' src="/images/clock-rotate-left-solid.svg" alt="" />
                     </Link>
                 </li>
                 <li>
-                    <Link to="/newGame">
-                        <img src="/images/circle-plus-solid.svg" alt="" />
+                    <Link to="/newGame"  className="h-9 w-9 flex items-center justify-center">
+                        <img className='menu_icons' src="/images/circle-plus-solid.svg" alt="" />
                     </Link>
                 </li>
             </ul>

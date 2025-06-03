@@ -5,6 +5,7 @@ import Spitting from "./pages/Spitting";
 import Home from "./pages/Home";
 import SpittingItemDetails from "./pages/SpittingItemDetails";
 import Rating from "./pages/Rating";
+import Auth from "./pages/Auth";
 
 function App() {
   return (

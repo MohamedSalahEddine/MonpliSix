@@ -15,7 +15,7 @@ export default function PlayerHistory() {
           <Link to={"../"}>
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
           </Link>
-        <Player player={players[1]}  />
+        <Player size={120} player={players[1]}  />
         <div className='history_middle w-full h-[55vh] overflow-scroll '>
             {
               games.map(game => {

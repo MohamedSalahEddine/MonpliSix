@@ -645,8 +645,8 @@ img,
   height: 5rem;
 }
 
-.h-6 {
-  height: 1.5rem;
+.h-9 {
+  height: 2.25rem;
 }
 
 .h-\[55vh\] {
@@ -670,10 +670,6 @@ img,
   width: 2.5rem;
 }
 
-.w-6 {
-  width: 1.5rem;
-}
-
 .w-9 {
   width: 2.25rem;
 }
@@ -695,8 +691,12 @@ img,
   width: 100%;
 }
 
-.min-w-12 {
-  min-width: 3rem;
+.w-\[80\%\] {
+  width: 80%;
+}
+
+.w-\[90\%\] {
+  width: 90%;
 }
 
 .cursor-pointer {
@@ -794,6 +794,14 @@ img,
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.rounded-\[20px\] {
+  border-radius: 20px;
+}
+
+.rounded-\[40px\] {
+  border-radius: 40px;
 }
 
 .border {
@@ -907,6 +915,18 @@ img,
   padding-bottom: 0.5rem;
 }
 
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -942,11 +962,6 @@ img,
 .text-\[\#f46464\] {
   --tw-text-opacity: 1;
   color: rgb(244 100 100 / var(--tw-text-opacity, 1));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .text-blue-500 {
@@ -996,12 +1011,12 @@ img,
 }
 
 .bor{
-  border: 2px solid green;
+  /* border: 2px solid green; */
 }
 
 .frame{
-  padding: 1rem;
-  height: 100vh;
+  position: relative;
+  height: 95vh;
   background:linear-gradient(130deg, #1B2D37, #5D6E75);
 }
 
@@ -1009,93 +1024,111 @@ img,
   /* border: 1px solid red; */
 }
 
-.frame img{
-  width: 40px;
+.menu_icons{
+  width: 30px;
 }
 
+.menu_Link{
+  height: -webkit-fit-content;
+  height: fit-content;
+}
+
+/* 
 .player img{
-  width: 50px !important;
+    width: 50px !important;
 }
 
 .player_history .player_img {
-  width: 120px !important;
-  max-width: none;
+    width: 120px !important;
+    max-width: none;
 }
 
 .history_middle .player_img{
-  width: 60px !important;
-  max-width: none;
+    width: 60px !important;
+    max-width: none;
 }
 
 .feild{
-  background: url("../public/images/playground.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #96FD52;
-  /* background-size: ; */
-  background-size: 30rem 35rem;
-  margin:  .5rem 0;
+    background: url("../public/images/playground.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #96FD52;
+    background-size: 30rem 35rem;
+    margin:  .5rem 0;
 }
 
 .feild .player {
-  position: absolute;
+    position: absolute;
 }
 
+
+
+
 .history_middle::before{
-  content: "----------------------معدلك     --  م. المباراة";
-  font-size: 11px;
+    content: "----------------------معدلك     --  م. المباراة";
+    font-size: 11px;
 }
 
 .game_history .player{
-  border-radius: 50% !important;
+    border-radius: 50% !important;
 }
+
 
 .icon_left{
-  width: 30px !important;
+    width: 30px !important;
 }
+
+
 
 .spitting_items img{
-  width: 90px;
+    width: 90px;
 }
+
+
 
 .spitting_item_details_top img{
-  width: 110px;
+    width: 110px;
 }
+
+
 
 .spitting_item_details_bottom img{
-  width: 50px !important;
+    width: 50px !important;
+}
+.spitting_item_details_bottom *{
 }
 
-.spitting_item_details_bottom *{
-  /* border: 1px solid red; */
-}
 
 .player_rating .player{
-  position: absolute;
-  width: 50px !important;
+    position: absolute;
+    width: 50px !important;
 }
-
 .player_rating .player img{
-  /* display: none; */
-  width: 40px !important;
+    width: 40px !important;
 }
-
 .player_rating .player .player_name{
-  display: none;
+    display: none;
 }
 
 .caret{
-  width: 20px !important;
+    width: 20px !important;
 }
-
 .caret_down{
-  position: absolute;
-  left: 5px;
-  top: 20px;
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+.caret_up{
+    position: absolute;
+    right: 5px;
+    top: 20px;
+}
+.bottom_menu * {
+    margin: 0;
+    padding: 0;
 }
 
-.caret_up{
-  position: absolute;
-  right: 5px;
-  top: 20px;
-}
+.bottom_menu li{
+    background-color: red;
+    height: 15px;
+} */
