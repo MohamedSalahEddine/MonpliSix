@@ -7,7 +7,7 @@ export default function BottomMenu() {
         <nav>
             <ul className='flex justify-around'>
                 <li>
-                    <Link to="/">
+                    <Link to="/rating">
                         <img src="/images/star-solid.svg" alt="" />
                     </Link>
                 </li>
@@ -18,7 +18,7 @@ export default function BottomMenu() {
                 </li>
                 <li>
                     <Link to="/spitting">
-                        <img src="/images/list-solid.svg" alt="" />
+                        <img src="/images/droplet-solid.svg" alt="" />
                     </Link>
                 </li>
                 <li>

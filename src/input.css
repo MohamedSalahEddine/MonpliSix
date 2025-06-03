@@ -12,18 +12,17 @@
 }
 
 .bor{
-    /* border: 1px solid green; */
+    border: 2px solid green;
 }
 
 .frame{
     padding: 1rem;
     height: 100vh;
     background:linear-gradient(130deg, #1B2D37, #5D6E75);
-    /* background:linear-gradient(130deg, red, green); */
 }
 
 *{
-    /* border: 2px solid red; */
+    /* border: 1px solid red; */
 }
 .frame img{
     width: 40px;
@@ -61,6 +60,7 @@
 
 
 
+
 .history_middle::before{
     content: "----------------------معدلك     --  م. المباراة";
     font-size: 11px;
@@ -73,4 +73,52 @@
 
 .icon_left{
     width: 30px !important;
+}
+
+
+
+.spitting_items img{
+    width: 90px;
+}
+
+
+
+.spitting_item_details_top img{
+    width: 110px;
+}
+
+
+
+.spitting_item_details_bottom img{
+    width: 50px !important;
+}
+.spitting_item_details_bottom *{
+    /* border: 1px solid red; */
+}
+
+
+.player_rating .player{
+    position: absolute;
+    width: 50px !important;
+}
+.player_rating .player img{
+    /* display: none; */
+    width: 40px !important;
+}
+.player_rating .player .player_name{
+    display: none;
+}
+
+.caret{
+    width: 20px !important;
+}
+.caret_down{
+    position: absolute;
+    left: 5px;
+    top: 20px;
+}
+.caret_up{
+    position: absolute;
+    right: 5px;
+    top: 20px;
 }

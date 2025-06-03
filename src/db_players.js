@@ -8,6 +8,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -19,6 +20,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -30,6 +32,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -41,6 +44,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -49,9 +53,10 @@ let players = [
     foot: "d",
     pos: "gb",
     rating: 7.9,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -60,9 +65,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 9.5,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -74,6 +80,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -82,9 +89,10 @@ let players = [
     foot: "g",
     pos: "at",
     rating: 7.5,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -93,9 +101,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 7.5,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -104,9 +113,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 5.5,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -115,10 +125,11 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 8.1,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
-    last_played_date: getDate("recent") // matched taarek
+    paid: true,
+    last_played_date: getDate("recent")
   },
   {
     name: "Tech",
@@ -129,6 +140,7 @@ let players = [
     status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -140,6 +152,7 @@ let players = [
     status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: true,
     last_played_date: getDate("recent")
   },
   {
@@ -148,9 +161,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 7.5,
-    status: "permanent",
+    status: "invite",
     coor: "top-[0px] left-[140px]",
     selected: false,
+    paid: false,
     last_played_date: getDate("default")
   },
   {
@@ -162,10 +176,9 @@ let players = [
     status: "permanent",
     coor: "top-2 right-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
-
-  // New players
   {
     name: "Isam",
     img: "isam",
@@ -175,6 +188,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -186,6 +200,7 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -194,9 +209,10 @@ let players = [
     foot: "d",
     pos: "md",
     rating: 6.0,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -205,9 +221,10 @@ let players = [
     foot: "d",
     pos: "gb",
     rating: 6.5,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -216,9 +233,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 6.8,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: true,
     last_played_date: getDate("recent")
   },
   {
@@ -227,9 +245,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 7.3,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -238,9 +257,10 @@ let players = [
     foot: "d",
     pos: "at",
     rating: 7.3,
-    status: "invite",
+    status: "permanent",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
   },
   {
@@ -252,9 +272,11 @@ let players = [
     status: "invite",
     coor: "top-2 left-2",
     selected: false,
+    paid: false,
     last_played_date: getDate("recent")
-  } 
+  }
 ];
+
 
 function getDate(type){
   let today = new Date()
