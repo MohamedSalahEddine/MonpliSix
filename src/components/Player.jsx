@@ -30,13 +30,19 @@ export default function Player({player, size = 90, onClick, display_rating = tru
 
   const shadow = selected ? "shadow-md shadow-green-400":""
   // console.log(pad_x);
+
+
+  const cn = `player 
+              flex flex-col items-center 
+              cursor-pointer select-none rounded-full 
+              ${shadow} z-4`
   
 
   return (
         <div onClick={ ()=> onClick && onClick(player)} 
           style={{ width : size , height: size , minHeight : size, minWidth: size}} 
           // style={{ width : size , height: size, padding : `0px ${pad_x}px`}} 
-          className={`player  flex flex-col items-center  cursor-pointer select-none rounded-full border-blue-400  ${shadow}`}
+          className={cn}
           >
             <span 
               style={{fontSize : "12px"}} 

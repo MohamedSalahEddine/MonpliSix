@@ -8,10 +8,15 @@ import GameHistory from '../components/GameHistory'
 import { Link } from 'react-router-dom'
 
 export default function PlayerHistory() {
+
+  const cn = `frame player_history 
+              flex flex-col relative gap-3 items-center 
+              text-white m-auto bor`
+
   return (
     // 96FD52   FD6652
-    // 2A3C45
-    <div className='container player_history relative flex flex-col gap-3 text-white items-center frame m-auto bor'>
+    // 2A3C45ù
+    <div className={cn}>
           <Link to={"../"}>
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
           </Link>

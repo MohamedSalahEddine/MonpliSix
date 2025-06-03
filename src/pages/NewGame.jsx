@@ -17,26 +17,30 @@ export default function NewGame() {
     
   }
 
+  const cn = `new_game frame
+              relative flex flex-col 
+              text-white m-auto bor`
+
   return (
-    <div className='container relative flex flex-col justify-evenly text-white frame m-auto bor'>
+    <div className={cn}>
+        <Link to={"../"}>
+          <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
+        </Link>
         <div className='flex items-center justify-between'>
-          <Link to={"../"}>
-            <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
-          </Link>
           <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => player.selected).length} </p>
         </div>
-        <div className='flex gap-2 py-2 h-fit  overflow-y-hidden overflow-x-scroll'>
+        <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll'>
           {
             players.map(player=>{
-              return <Player key={player.name} player={player} onClick={handleClick}/>
+              return <Player size={55} key={player.name} player={player} onClick={handleClick}/>
             })
           }
 
         </div>
-        <div className='feild relative h-[70vh]'>
+        <div className='feild relative h-[68vh]'>
           {
             players.map(player=>{
-              return player.selected && <Player key={player.name} player={player}/>
+              return player.selected && <Player size={55} key={player.name} player={player}/>
             })
           }
         </div>

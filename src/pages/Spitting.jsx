@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 import spitting_items from '../db_spitting_items.js'
 
 export default function Spitting() {
+
+  const cn = `frame flex items-center`
   return (
-    <div className='frame flex items-center'>
+    <div className={cn}>
         <Link to={"../"}>
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
         </Link>
