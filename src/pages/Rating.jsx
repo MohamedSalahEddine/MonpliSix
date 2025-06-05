@@ -23,6 +23,7 @@ export default function Rating() {
                 })
             }
         </div>
+    
         <button className='mt-2 bg-green-400 text-white p-4'>confirmer</button>
         <BottomMenu />
     </div>
