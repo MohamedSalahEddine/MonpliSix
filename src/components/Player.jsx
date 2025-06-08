@@ -3,7 +3,7 @@ import React from 'react'
 export default function Player({player, size = 90, onClick, display_rating = true}) {
   
   const {name, rating, selected, img  } = player
-  const img_src = img !==""? `/images/joueurs/${img}.jpg` : '/images/joueurs/camera-solid.svg'
+  const img_src = img !==""? `/images/joueurs/${img}` : '/images/joueurs/camera-solid.svg'
 
 
   function color_rating(){
