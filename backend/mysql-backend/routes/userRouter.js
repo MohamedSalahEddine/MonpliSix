@@ -1,10 +1,11 @@
 import express from "express"
 import { db } from "../db.js"
-import { register, login, getAllUsers, getUser } from "../controllers/userController.js"
+import { register, login, getAllUsers, getSpittingUsers,  getUser } from "../controllers/userController.js"
 
 const  userRouter = express.Router()
 
 userRouter.get("/", getAllUsers)
+userRouter.get("/spittingUsers", getSpittingUsers)
 userRouter.get("/:id", getUser)
 userRouter.post("/", register)
 

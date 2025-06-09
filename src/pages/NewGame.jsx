@@ -15,12 +15,8 @@ export default function NewGame() {
       const res = await fetch("http://localhost:3001/players")
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
-      setPlayers(data)
-      // console.log("heyyyy");
-      console.log(data);
-      
+      setPlayers(data)      
     }
-
     loadPlayers()
   },[])
  

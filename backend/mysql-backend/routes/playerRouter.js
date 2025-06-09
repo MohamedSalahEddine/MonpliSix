@@ -1,6 +1,6 @@
 import express from "express"
 
-import { getAllPlayers, getPlayer, addPlayer } from "../controllers/playerController.js"
+import { getAllPlayers,  getPlayer, addPlayer } from "../controllers/playerController.js"
 
 const playerRouter = express.Router()
 

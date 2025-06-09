@@ -1,4 +1,4 @@
-let players = [
+let users = [
   {
     name: "Adlene",
     img: "adlene",
@@ -304,9 +304,9 @@ function playerComparator(player1, player2){
   
 }
 
-players.sort(playerComparator)
+users.sort(playerComparator)
 
 // console.log(players);
 
 
-export default players;
+export default users;

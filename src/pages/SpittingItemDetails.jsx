@@ -1,20 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import BottomMenu from '../components/BottomMenu'
-import players from '../db_players'
+import users from '../db_players.js'
 import { useParams } from 'react-router-dom'
-import spitting_items from '../db_spitting_items'
-import Player from "../components/Player"
+import spitting_items from '../db_spitting_items.js'
+import PLayer from "../components/Player.jsx"
 
 export default function SpittingItemDetails() {
-    const {id : id_url} = useParams()
-    const {id, title, img, price, date, current_accumulated} =  spitting_items.find(element => element.id ===  Number(id_url))
-    const nbr_perm_players = players.filter(player => player.status==="permanent").length
+
+    const [users, setUsers] = useState(null)
+    const [spitting_item, setSpittingItem] = useState(null)
+
+    useEffect(()=>{
+        const loadUsers = async ()=>{
+            const res = await fetch("http://localhost:3001/users/spittingUsers")
+            if (!res.ok) throw new Error("Failed to fetch spitting usersss");
+            const data = await res.json()
+            console.log(data);
+            setUsers(data)      
+        }
+
+        loadUsers()
+    },[])
+
+  
+    
+    // const {id : id_url} = useParams()
+    // const {id, title, img, price, date, current_accumulated} =  spitting_items.find(element => element.id ===  Number(id_url))
+    // const nbr_perm_users = users.filter(user => true).length
+    // const nbr_perm_users = users.filter(user => user.status==="permanent").length
 
     // rounding up to tens
-    const price_per_player =  parseInt( price / nbr_perm_players ) +  (10 -  parseInt( price / nbr_perm_players ) % 10)
+    // const price_per_user =  parseInt( price / nbr_perm_users ) +  (10 -  parseInt( price / nbr_perm_users ) % 10)
     
-    
+    if(users === null ) return "loading..."
+    // if(users === null || spitting_item === null) return "loading..."
   return (
     <div className='frame text-white'>
          <Link to={"/spitting"}>
@@ -22,29 +42,31 @@ export default function SpittingItemDetails() {
         </Link>
         
         <div className='spitting_item_details_top flex flex-col items-center gap-4'>
-            <span className='text-right w-full'>{date}</span>
-            <img src={`/images/${img}.svg`} alt="" />
+            {/* <span className='text-right w-full'>{date}</span> */}
+            {/* <img src={`/images/${img}.svg`} alt="" /> */}
             <span className='text-4xl flex items-center gap-1'> 
                 <span className='text-2xl'>DA </span> 
-                {price} / {nbr_perm_players}
+                {/* {price} / {nbr_perm_users} */}
             </span>
-            {/* <span className={color+" text-4xl"}>DA {parseInt(price / nbr_perm_players)}</span> */}
-            <span className={"text-blue-500 text-4xl"}>DA {  price_per_player }</span>
+            {/* <span className={color+" text-4xl"}>DA {parseInt(price / nbr_perm_users)}</span> */}
+            {/* <span className={"text-blue-500 text-4xl"}>DA {  price_per_user }</span> */}
         </div>
         <div className='spitting_item_details_bottom flex h-[60vh] mt-4'>
             <div className='paid w-[49%] border-r-2 border-gray-400 overflow-scroll flex flex-wrap content-start justify-center gap-2'>
-                <p className="text-[#35e455] text-center w-full self-start text-4xl">DA { price_per_player * players.filter(player => player.paid).length}</p>
+                {/* <p className="text-[#35e455] text-center w-full self-start text-4xl">DA { price_per_user * users.filter(user => user.paid).length}</p> */}
                 {
-                    players.filter(player => player.status === "permanent" && player.paid).map(player=>{
-                        return <Player key={player.id} display_rating={false} player={player}/>
+                    users.filter(user => user.date_paid !== null).map(user=>{
+                    // users.filter(user => user.status === "permanent" && user.paid).map(user=>{
+                        return <PLayer key={user.id} display_rating={false} player={user}/>
                     })
                 }
             </div>
             <div className='paid w-[49%] overflow-scroll flex flex-wrap content-start justify-center gap-2'>
-                <p className="text-[#f46464] text-center w-full self-start text-4xl">DA { price_per_player * players.filter(player => player.status=== "permanent" && !player.paid).length}</p>
+                {/* <p className="text-[#f46464] text-center w-full self-start text-4xl">DA { price_per_user * users.filter(user => user.status=== "permanent" && !user.paid).length}</p> */}
                 {
-                    players.filter(player => player.status === "permanent" && !player.paid).map(player=>{
-                        return <Player key={player.id} display_rating={false} player={player}/>
+                    users.filter(user => user.date_paid === null).map(user=>{
+                    // users.filter(user => user.status === "permanent" && !user.paid).map(user=>{
+                        return <PLayer key={user.id} display_rating={false} player={user}/>
                     })
                 }
             </div>

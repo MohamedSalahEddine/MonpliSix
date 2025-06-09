@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SpittingItem from '../components/SpittingItem'
 import BottomMenu from '../components/BottomMenu'
 import { Link } from 'react-router-dom'
 import spitting_items from '../db_spitting_items.js'
 
 export default function Spitting() {
+
+
 
   const cn = `frame flex items-center`
   return (
