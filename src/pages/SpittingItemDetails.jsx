@@ -12,15 +12,27 @@ export default function SpittingItemDetails() {
     const [spitting_item, setSpittingItem] = useState(null)
 
     useEffect(()=>{
-        const loadUsers = async ()=>{
-            const res = await fetch("http://localhost:3001/users/spittingUsers")
-            if (!res.ok) throw new Error("Failed to fetch spitting usersss");
-            const data = await res.json()
-            console.log(data);
-            setUsers(data)      
+        const loadData = async ()=>{
+            const [resUsers, resItem] = await Promise.all(
+                fetch ("http://localhost:3001/users/spittingUsers"),
+                fetch ("http://localhost:3001/users/spittingItems/1")
+            )
+            // const res = await fetch("http://localhost:3001/users/spittingUsers")
+            if (!resUsers.ok) throw new Error("Failed to fetch spitting usersss");
+            if (!resItem.ok) throw new Error("Failed to fetch spitting Item");
+            const[dataUsers, dataItem] = await Promise.all(
+                resUsers.json(),
+                resItem.json()
+            )
+
+            // const data = await res.json()
+            console.log(dataUsers);
+            console.log(dataItem);
+            setUsers(dataUsers)      
+            setSpittingItem(dataItem)      
         }
 
-        loadUsers()
+        loadData()
     },[])
 
   
