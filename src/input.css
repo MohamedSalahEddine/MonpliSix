@@ -57,7 +57,34 @@
     /* border: 1px solid black; */
 
 }
+.spitting_item_details_img{
+    width: 100px !important;
+}
 
+
+
+.paid, .unpaid {
+    min-height: 100%;
+    transition: background-color 0.3s;
+}
+
+.paid.drag-over, .unpaid.drag-over {
+    background-color: rgba(53, 228, 85, 0.1);
+}
+
+.unpaid.drag-over {
+    background-color: rgba(244, 100, 100, 0.1);
+}
+
+[draggable] {
+    cursor: grab;
+}
+*{
+    border: 1px solid red;
+}
+[draggable]:active {
+    cursor: grabbing;
+}
 /* 
 .player img{
     width: 50px !important;

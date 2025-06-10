@@ -15,8 +15,10 @@ const getAllSpittingItems = async (req, res) => {
 
 
 const getSpittingItem = async (req, res ) => {
+    const {id} = req.params
+
     try{
-        const [spitting_items] = await db.query("SELECT * FROM spitting_items WHERE id=?", [req.params.id])
+        const [spitting_items] = await db.query("SELECT * FROM spitting_items WHERE id=?", [id])
         if(spitting_items.length < 1) return res.status(400).json({message : "no spitting_items found"})
 
         return res.status(200).json(spitting_items)
