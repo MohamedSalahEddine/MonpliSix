@@ -5,7 +5,7 @@ import { register, login, getAllUsers, getSpittingUsers,  getUser } from "../con
 const  userRouter = express.Router()
 
 userRouter.get("/", getAllUsers)
-userRouter.get("/spittingUsers", getSpittingUsers)
+userRouter.get("/spittingUsers/:id", getSpittingUsers)
 userRouter.get("/:id", getUser)
 userRouter.post("/", register)
 

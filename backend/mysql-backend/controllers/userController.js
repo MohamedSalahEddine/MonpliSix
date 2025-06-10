@@ -45,15 +45,13 @@ const getAllUsers = async (req, res)=>{
 }
 
 const getSpittingUsers = async (req, res)=>{
+    const {id} = req.params 
+    // console.log("heyy",id);
+    
     try{
         const [players] = await db.query(`SELECT users.id, users.username as name,  users.img ,  spitting_item_user.date_paid
                                             FROM users INNER JOIN spitting_item_user on users.id = spitting_item_user.user_id 
-                                            && spitting_item_user.spitting_item_id = 1`)
-        // const [players] = await db.query(`SELECT users.id, users.username as name,  users.img  
-        //                                     FROM users INNER JOIN roles ON users.role_id = roles.id 
-        //                                     INNER JOIN role_permissions ON roles.id = role_permissions.role_id 
-        //                                     INNER JOIN permissions ON permissions.id = role_permissions.permission_id
-        //                                     WHERE permissions.name = "spit"`)
+                                            && spitting_item_user.spitting_item_id = ?`, [id])
         if(players.length < 1) return res.status(400).json({message : "no spitting users found"})
         return  res.status(200).json(players)
     }catch(error){
@@ -66,7 +64,7 @@ const getSpittingUsers = async (req, res)=>{
 const getUser = async (req, res)=>{
     const id = req.params.id
     try{
-        const sql = `select * from user where id=?`
+        const sql = `select * from users where id=?`
         const [user] = await db.query(sql, [id])
         // console.log(user);
         res.json(user)

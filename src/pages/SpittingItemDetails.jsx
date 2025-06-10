@@ -9,32 +9,22 @@ import PLayer from "../components/Player.jsx"
 export default function SpittingItemDetails() {
 
     const [users, setUsers] = useState(null)
-    const [spitting_item, setSpittingItem] = useState(null)
+
+    const {id} = useParams()
+    
+    console.log(id);
+    
 
     useEffect(()=>{
-        const loadData = async ()=>{
-            const [resUsers, resItem] = await Promise.all(
-                fetch ("http://localhost:3001/users/spittingUsers"),
-                fetch ("http://localhost:3001/users/spittingItems/1")
-            )
-            // const res = await fetch("http://localhost:3001/users/spittingUsers")
-            if (!resUsers.ok) throw new Error("Failed to fetch spitting usersss");
-            if (!resItem.ok) throw new Error("Failed to fetch spitting Item");
-            const[dataUsers, dataItem] = await Promise.all(
-                resUsers.json(),
-                resItem.json()
-            )
+    const loadData = async ()=>{
+        const  resItems = await fetch ("http://localhost:3001/users/spittingUsers/"+id)
+        if (!resItems.ok) throw new Error("Failed to fetch spitting Item");
+        const dataItems = await resItems.json()
+        setUsers(dataItems)      
+    }
 
-            // const data = await res.json()
-            console.log(dataUsers);
-            console.log(dataItem);
-            setUsers(dataUsers)      
-            setSpittingItem(dataItem)      
-        }
-
-        loadData()
+    loadData()
     },[])
-
   
     
     // const {id : id_url} = useParams()
