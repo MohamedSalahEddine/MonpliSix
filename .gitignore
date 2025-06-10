@@ -7,6 +7,7 @@
 
 /backend/mysql-backend/node_modules
 
+/monpli.sql
 # testing
 /coverage
 
