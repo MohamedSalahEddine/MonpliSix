@@ -70,7 +70,8 @@ const getUser = async (req, res)=>{
         res.json(user)
         
     }catch(error){
-        console.error(`error fetching user`, error)
+        console.error(`error fetching user`, error.message)
+        console.error(error)
         res.status(500).json({error : "a problem with the server occured :/"})
     }
     
