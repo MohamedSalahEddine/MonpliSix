@@ -80,7 +80,7 @@
     cursor: grab;
 }
 *{
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 [draggable]:active {
     cursor: grabbing;

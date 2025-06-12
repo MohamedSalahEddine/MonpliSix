@@ -12,7 +12,16 @@ export default function NewGame() {
 
   useEffect(()=>{
     const loadPlayers = async ()=>{
-      const res = await fetch("http://localhost:3001/players")
+
+      const token = localStorage.getItem('token')
+       const res = await fetch("http://localhost:3001/players", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      });
+      
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
       setPlayers(data)      

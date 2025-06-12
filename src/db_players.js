@@ -49,7 +49,7 @@ let users = [
   },
   {
     name: "Chapou",
-    img: "chapou",
+    img: "chapou.jpg",
     foot: "d",
     pos: "gb",
     rating: 7.9,

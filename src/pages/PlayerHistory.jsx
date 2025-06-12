@@ -1,7 +1,7 @@
 import React from 'react'
 import BottomMenu from '../components/BottomMenu'
 
-import players from '../db_players'
+import players from '../db_players.js'
 import Player from '../components/Player'
 import games from "../db_games"
 import GameHistory from '../components/GameHistory'

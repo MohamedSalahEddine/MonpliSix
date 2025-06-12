@@ -615,6 +615,10 @@ img,
   display: flex;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-20 {
   height: 5rem;
 }
@@ -644,12 +648,12 @@ img,
   height: fit-content;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .w-10 {
   width: 2.5rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-9 {
@@ -675,10 +679,6 @@ img,
 
 .w-full {
   width: 100%;
-}
-
-.w-16 {
-  width: 4rem;
 }
 
 .cursor-pointer {
@@ -1046,7 +1046,7 @@ img,
 }
 
 *{
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 [draggable]:active {

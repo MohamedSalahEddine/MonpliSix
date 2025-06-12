@@ -16,7 +16,7 @@ function App() {
         <Route path="/spitting" element={<Spitting/>}/>
         <Route path="/spittingItemDetails/:id" element={<SpittingItemDetails/>}/>
         <Route path="/history" element={<PlayerHistory/>}/>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Auth />}/>
       </Routes>
     </BrowserRouter>
     
