@@ -21,7 +21,7 @@ export default function NewGame() {
           "Content-Type": "application/json"
         }
       });
-      
+
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
       setPlayers(data)      
@@ -65,7 +65,7 @@ export default function NewGame() {
         <div className='feild relative h-[68vh]'>
           {
             players.map(player=>{
-              return  <Player size={55} key={player.id} player={player}/>
+              // return  <Player size={55} key={player.id} player={player}/>
             })
           }
         </div>
