@@ -9,7 +9,7 @@ import players from '../db_players'
 export default function Rating() {
 
     const cn = `frame rating
-                flex justify-center flex-col`
+                flex justify-center flex-col justify-between`
   return (
     <div className={cn}>
         <Link to={"../"}>

@@ -20,7 +20,7 @@ export default function Spitting() {
 
   if(spitting_items === null) return "loading.."
 
-  const cn = `frame flex items-center`
+  const cn = `frame flex items-center flex-col justify-between`
   return (
     <div className={cn}>
         <Link to={"../"}>

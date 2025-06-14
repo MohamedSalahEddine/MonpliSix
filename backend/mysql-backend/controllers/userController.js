@@ -78,6 +78,7 @@ const getUser = async (req, res)=>{
         const sql = `select * from users where id=?`
         const [user] = await db.query(sql, [id])
         // console.log(user);
+        
         res.json(user)
         
     }catch(error){

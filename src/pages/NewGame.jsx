@@ -30,14 +30,14 @@ export default function NewGame() {
   },[])
  
   
-
-
-  function handleClick(clickedPlayer){
-    // setPlayers(prevPlayers => prevPlayers.map(player=>{
-    //   return player.name === clickedPlayer.name ? {...player, selected : !player.selected} : player
-    // }))
+  const handleAnnuler = ()=>{
     
   }
+  const handleConfirmer = ()=>{
+
+  }
+
+
 
   const cn = `new_game frame
               relative flex flex-col 
@@ -57,17 +57,30 @@ export default function NewGame() {
         <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll'>
           {
             players.map(player=>{
-              return <Player size={55} key={player.id} player={player} onClick={handleClick}/>
+              return <Player size={55} key={player.id} player={player} />
             })
           }
 
         </div>
-        <div className='feild relative h-[68vh]'>
-          {
-            players.map(player=>{
-              // return  <Player size={55} key={player.id} player={player}/>
-            })
-          }
+        <div className='feild relative h-[68vh] w-[90vw] m-auto'>
+          <div className='team-A h-[34vh] flex flex-wrap'>
+            {
+              players.slice(0, 6).map(player => {
+                return <Player size={45} key={player.id} player={player}/>
+              })
+            }
+          </div>
+          <div className='team-B h-[34vh] flex flex-wrap'>
+            {
+              players.slice(6, 12).map(player => {
+                return <Player size={45} key={player.id} player={player}/>
+              })
+            }
+          </div>
+        </div>
+        <div className='flex justify-center gap-6 mb-2'>
+          <button onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
+          <button onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
         </div>
         <BottomMenu />
     </div>

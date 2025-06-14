@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function BottomMenu() {
   return (
-    <div className='bottom_menu w-full absolute bottom-0'>
+    <div className='bottom_menu w-full  bottom-0'>
         <nav>
             <ul className='flex justify-around '>
                 <li>
