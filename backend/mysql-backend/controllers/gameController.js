@@ -20,12 +20,10 @@ const addGame = async (req, res)=>{
         const sql0 = `INSERT INTO game (created_by, created_at) values (?, NOW())`
         const [response0] = await db.query(sql0, [created_by])
         const last_inserted_game = response0.insertId 
-        console.log(last_inserted_game);
 
         const sql1 = `INSERT INTO teams (game_id) VALUES (?), (?)`
         const [response1] = await db.query(sql1, [(last_inserted_game), (last_inserted_game)])
         const last_inserted_team = response1.insertId
-        console.log("last_inserted_team : "+last_inserted_team);
         
                 
         const { playersTeamA, playersTeamB } = req.body;

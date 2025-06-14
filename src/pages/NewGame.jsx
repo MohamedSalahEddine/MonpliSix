@@ -49,8 +49,8 @@ export default function NewGame() {
           "Authorization" : `Bearer ${token}`
         },
         body : JSON.stringify({ 
-          playersTeamA : players.slice(0, 6).map(player => player.id),
-          playersTeamB : players.slice(6, 12).map(player => player.id),
+          playersTeamA : players.slice(4, 14).map(player => player.id),
+          playersTeamB : players.slice(14, 24).map(player => player.id),
         })
       }
     )
