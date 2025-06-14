@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 export default function Auth() {
 
 
-  const[username, setUsername] = useState("")
-  const[password, setPassword] = useState("")
+  const[username, setUsername] = useState("Alla")
+  const[password, setPassword] = useState("1838")
   const[message, setMessage] = useState("")
 
   const navigate = useNavigate()

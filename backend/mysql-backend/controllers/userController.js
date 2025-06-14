@@ -48,6 +48,8 @@ const login = async (req, res)=>{
 }
 
 const getAllUsers = async (req, res)=>{
+    console.log(req.user);
+    
    try{
         const sql = `select * from users`
         const [users] = await db.query(sql)
@@ -120,19 +122,20 @@ const markAsUnpaid =  async (req, res) => {
 
 
 const authenticateToken = (req, res, next) => {
+    
     const authHeader = req.headers["authorization"]
-    const token = authHeader && authHeader.split(" ")[0]
-
+    const token = authHeader && authHeader.split(" ")[1]
+    
     if(!token) return res.status(401).json({ error : "access denied : token missing"})
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user)=>{
         if(err){
             return res.status(403).json({ error : "access denied: token invalid"})
         }
-
         req.user = user
         next()
     })
+    
 }
 
 export { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, markAsUnpaid, authenticateToken }

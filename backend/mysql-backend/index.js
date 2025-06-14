@@ -9,6 +9,7 @@ dotenv.config()
 import { userRouter } from "./routes/userRouter.js"
 import { playerRouter } from "./routes/playerRouter.js"
 import { spittingItemsRouter } from "./routes/spittingItemsRouter.js"
+import { gameRouter } from "./routes/gameRouter.js"
 
 const app = express()
 app.use(express.json())
@@ -17,6 +18,7 @@ app.use(cors())
 
 app.use("/users", userRouter)
 app.use("/players", playerRouter)
+app.use("/games", gameRouter)
 app.use("/spittingItems", spittingItemsRouter)
 
 

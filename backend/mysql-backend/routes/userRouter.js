@@ -4,7 +4,7 @@ import { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, m
 
 const  userRouter = express.Router()
 
-userRouter.get("/",authenticateToken, getAllUsers)
+userRouter.get("/", authenticateToken, getAllUsers)
 userRouter.get("/spittingUsers/:id", getSpittingUsers)
 
 userRouter.put('/markPaid/:userId/:itemId', markAsPaid);

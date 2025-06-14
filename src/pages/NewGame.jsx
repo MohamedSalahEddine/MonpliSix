@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom'
 export default function NewGame() {
 
   const [players, setPlayers] = useState(null)
+  const [teamA, setTeamA] = useState(null)
+  const [teamB, setTeamB] = useState(null)
 
   useEffect(()=>{
     const loadPlayers = async ()=>{
@@ -33,8 +35,25 @@ export default function NewGame() {
   const handleAnnuler = ()=>{
     
   }
-  const handleConfirmer = ()=>{
-
+  const handleConfirmer = async (e)=>{
+    e.preventDefault()
+    console.log("btn confirmer clicked");
+    
+    const token = localStorage.getItem("token")
+    const res = await fetch("http://localhost:3001/games",
+      
+      {
+        method : "POST",
+        headers : {
+          "Content-Type" :"application/json",
+          "Authorization" : `Bearer ${token}`
+        },
+        body : JSON.stringify({ 
+          playersTeamA : players.slice(0, 6).map(player => player.id),
+          playersTeamB : players.slice(6, 12).map(player => player.id),
+        })
+      }
+    )
   }
 
 
@@ -64,18 +83,10 @@ export default function NewGame() {
         </div>
         <div className='feild relative h-[68vh] w-[90vw] m-auto'>
           <div className='team-A h-[34vh] flex flex-wrap'>
-            {
-              players.slice(0, 6).map(player => {
-                return <Player size={45} key={player.id} player={player}/>
-              })
-            }
+            
           </div>
           <div className='team-B h-[34vh] flex flex-wrap'>
-            {
-              players.slice(6, 12).map(player => {
-                return <Player size={45} key={player.id} player={player}/>
-              })
-            }
+            
           </div>
         </div>
         <div className='flex justify-center gap-6 mb-2'>

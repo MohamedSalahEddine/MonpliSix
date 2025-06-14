@@ -3,6 +3,8 @@ import { db } from "../db.js"
 import jwt from "jsonwebtoken"
 
 const getAllPlayers = async (req, res)=>{
+    console.log(req.user);
+    
     try{
         const [players] = await db.query(`SELECT * FROM players INNER JOIN users on players.id = users.player_id`)
         if(players.length < 1) return res.status(400).json({message : "no players found"})
@@ -24,6 +26,8 @@ const addPlayer = async (req, res)=>{
 
 
 const authenticateToken = (req, res, next) => {
+    
+        
     const authHeader = req.headers["authorization"]
     const token = authHeader && authHeader.split(" ")[1]
     
