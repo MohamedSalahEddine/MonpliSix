@@ -11,6 +11,7 @@ export default function NewGame() {
   const [players, setPlayers] = useState(null)
   const [teamA, setTeamA] = useState(null)
   const [teamB, setTeamB] = useState(null)
+  const [draggedPlayer, setDraggedPlayer] = useState(null)
 
   useEffect(()=>{
     const loadPlayers = async ()=>{
@@ -26,15 +27,27 @@ export default function NewGame() {
 
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
-      setPlayers(data)      
+      setPlayers(data)     
+      setTeamA(data.slice(0, 6))
+      setTeamB(data.slice(6, 14))
     }
     loadPlayers()
   },[])
+
+  const score = async (player) =>{
+    fetch("http://localhost:3001/games/insertGoal/:")
+    
+  }
+
+  const handleDragEnd = () => {
+
+  }
  
   
   const handleAnnuler = ()=>{
     
   }
+
   const handleConfirmer = async (e)=>{
     e.preventDefault()
     console.log("btn confirmer clicked");
@@ -49,8 +62,8 @@ export default function NewGame() {
           "Authorization" : `Bearer ${token}`
         },
         body : JSON.stringify({ 
-          playersTeamA : players.slice(4, 14).map(player => player.id),
-          playersTeamB : players.slice(14, 24).map(player => player.id),
+          playersTeamA : players.filter(player =>  ["chapou","tarek","alilou","paylou","ghani","zak","jak","patach"].includes(player.name.toLowerCase())).map(player => player.id),
+          playersTeamB : players.filter(player =>  ["lamine","tokoto","tech","houssem","karim","seif","kagawa","maitou"].includes(player.name.toLowerCase())).map(player => player.id)
         })
       }
     )
@@ -73,20 +86,34 @@ export default function NewGame() {
           {/* <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => player.selected).length} </p> */}
           <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => true).length} </p>
         </div>
-        <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll'>
+        <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide'>
           {
             players.map(player=>{
-              return <Player size={55} key={player.id} player={player} />
+              return  (
+                <div className=' h-fit' draggable onClick={()=> score( player)} key={player.id}>
+                  <Player size={55}  player={player} />
+                </div>
+              )
             })
           }
 
         </div>
         <div className='feild relative h-[68vh] w-[90vw] m-auto'>
-          <div className='team-A h-[34vh] flex flex-wrap'>
-            
+          <div onDragEnd={handleDragEnd} className='team-A borr h-[34vh] flex flex-wrap'>
+            {
+              teamA && teamA.length > 0 &&  teamA.map(player => {
+                return (
+                <div key={player.id}>
+                  <Player key={player.id} player={player} size={40}/>
+                </div>
+                );
+              })
+            }
           </div>
-          <div className='team-B h-[34vh] flex flex-wrap'>
-            
+          <div onDragEnd={handleDragEnd} className='team-B borr h-[34vh] flex flex-wrap'>
+            {
+              teamB && teamB.length > 0 &&  teamB.map(player => <Player key={player.id} player={player} size={40}/>)
+            }
           </div>
         </div>
         <div className='flex justify-center gap-6 mb-2'>
