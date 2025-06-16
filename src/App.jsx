@@ -15,7 +15,7 @@ function App() {
         <Route path="/newGame" element={<NewGame/>}/>
         <Route path="/spitting" element={<Spitting/>}/>
         <Route path="/spittingItemDetails/:id" element={<SpittingItemDetails/>}/>
-        <Route path="/history" element={<PlayerHistory/>}/>
+        <Route path="/history/:id" element={<PlayerHistory/>}/>
         <Route path="/" element={<Auth />}/>
       </Routes>
     </BrowserRouter>

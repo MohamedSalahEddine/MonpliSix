@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BottomMenu from '../components/BottomMenu'
 // import playersData from "../db_players"
 import Player from '../components/Player'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 
@@ -12,6 +12,7 @@ export default function NewGame() {
   const [teamA, setTeamA] = useState(null)
   const [teamB, setTeamB] = useState(null)
   const [draggedPlayer, setDraggedPlayer] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(()=>{
     const loadPlayers = async ()=>{
@@ -28,15 +29,16 @@ export default function NewGame() {
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
       setPlayers(data)     
-      setTeamA(data.slice(0, 6))
-      setTeamB(data.slice(6, 14))
+      setTeamA(data.slice(0, 7))
+      setTeamB(data.slice(7, 14))
     }
     loadPlayers()
   },[])
 
-  const score = async (player) =>{
-    fetch("http://localhost:3001/games/insertGoal/:")
-    
+  
+  const handleClick = (player) => {
+    console.log(player.id+ " clicked upon");
+    navigate("/history/"+player.id)
   }
 
   const handleDragEnd = () => {
@@ -54,7 +56,6 @@ export default function NewGame() {
     
     const token = localStorage.getItem("token")
     const res = await fetch("http://localhost:3001/games",
-      
       {
         method : "POST",
         headers : {
@@ -62,13 +63,43 @@ export default function NewGame() {
           "Authorization" : `Bearer ${token}`
         },
         body : JSON.stringify({ 
-          playersTeamA : players.filter(player =>  ["chapou","tarek","alilou","paylou","ghani","zak","jak","patach"].includes(player.name.toLowerCase())).map(player => player.id),
-          playersTeamB : players.filter(player =>  ["lamine","tokoto","tech","houssem","karim","seif","kagawa","maitou"].includes(player.name.toLowerCase())).map(player => player.id)
+          playersTeamA : teamA.map(player => player.id),
+          playersTeamB : teamB.map(player => player.id)
         })
       }
     )
   }
 
+  const handlePlayerClickedA = async (player) => {
+    
+    try{
+
+      console.log(player.name+" scored");
+      const res = await fetch("http://localhost:3001/games/score/"+player.id)
+      console.log(res);
+      const data = await res.json()
+      
+    }catch(error){
+      console.log("error : "+error);
+      
+    }
+  }
+  
+  const handlePlayerClickedB = async (player) => {
+    try{
+      
+      console.log(player.name+" scored");
+      const res = await fetch("http://localhost:3001/games/score/"+player.id)
+      console.log(res);
+      const data = await res.json()
+
+      
+    }catch(error){
+      console.log("error : "+error);
+      
+    }
+    
+  }
 
 
   const cn = `new_game frame
@@ -90,8 +121,8 @@ export default function NewGame() {
           {
             players.map(player=>{
               return  (
-                <div className=' h-fit' draggable onClick={()=> score( player)} key={player.id}>
-                  <Player size={55}  player={player} />
+                <div className=' h-fit' draggable  key={player.id}>
+                  <Player size={55}  player={player} onClick={() => handleClick(player)}/>
                 </div>
               )
             })
@@ -100,10 +131,11 @@ export default function NewGame() {
         </div>
         <div className='feild relative h-[68vh] w-[90vw] m-auto'>
           <div onDragEnd={handleDragEnd} className='team-A borr h-[34vh] flex flex-wrap'>
+            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {Math.round(teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
               teamA && teamA.length > 0 &&  teamA.map(player => {
                 return (
-                <div key={player.id}>
+                <div key={player.id} onClick={() => handlePlayerClickedA(player)}>
                   <Player key={player.id} player={player} size={40}/>
                 </div>
                 );
@@ -111,8 +143,15 @@ export default function NewGame() {
             }
           </div>
           <div onDragEnd={handleDragEnd} className='team-B borr h-[34vh] flex flex-wrap'>
+            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {(teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
             {
-              teamB && teamB.length > 0 &&  teamB.map(player => <Player key={player.id} player={player} size={40}/>)
+              teamB && teamB.length > 0 &&  teamB.map(player => {
+                return (
+                <div key={player.id} onClick={() => handlePlayerClickedB(player)}>
+                  <Player key={player.id} player={player} size={40}/>
+                </div>
+                );
+              })
             }
           </div>
         </div>
