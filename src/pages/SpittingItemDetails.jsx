@@ -277,7 +277,7 @@ export default function SpittingItemDetails() {
             
             <div className='spitting_item_details_bottom flex h-[60vh] mt-4'>
                 <div 
-                    className='paid w-[49%] border-r-2 border-gray-400 overflow-scroll flex flex-wrap content-start justify-center gap-2'
+                    className='paid w-[49%] overflow-scroll flex flex-wrap content-start justify-center gap-2 scrollbar-hide border-r-2 border-gray-400 '
                     onDragOver={handleDragOver}
                     onDrop={handleDropPaid}
                 >
@@ -296,7 +296,7 @@ export default function SpittingItemDetails() {
                 </div>
                 
                 <div 
-                    className='unpaid w-[49%] overflow-scroll flex flex-wrap content-start justify-center gap-2'
+                    className='unpaid w-[49%] overflow-scroll flex flex-wrap content-start justify-center gap-2 scrollbar-hide'
                     onDragOver={handleDragOver}
                     onDrop={handleDropUnpaid}
                 >

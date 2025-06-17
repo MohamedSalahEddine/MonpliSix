@@ -88,6 +88,10 @@
 [draggable]:active {
     cursor: grabbing;
 }
+
+button:disabled{
+    background-color: #5D6E75;
+}
 /* 
 .player img{
     width: 50px !important;

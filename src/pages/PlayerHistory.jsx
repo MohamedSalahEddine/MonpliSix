@@ -54,6 +54,9 @@ import { Link, useParams } from 'react-router-dom'
 export default function PlayerHistory() {
 
   const[game_history, setGameHistory] = useState(null)
+  const[nbr_of_goals, setNumberOfGoals] = useState(()=>{
+
+  })
   const {id} = useParams()
   
 
@@ -62,7 +65,7 @@ export default function PlayerHistory() {
       try{
         const res = await fetch("http://localhost:3001/games/gamesHistory/"+id)
         const data = await res.json()
-        console.log(data);
+        // console.log(data);
         setGameHistory(data)
         
         
@@ -71,8 +74,6 @@ export default function PlayerHistory() {
         
       }
       
-
-      
     }
 
     loadGames()
@@ -80,7 +81,7 @@ export default function PlayerHistory() {
 
   const cn = `frame player_history 
               flex flex-col relative gap-3 items-center 
-              text-white m-auto bor`
+              text-white m-auto `
 
   if(game_history === null) return "loading.."
   
@@ -90,7 +91,7 @@ export default function PlayerHistory() {
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
           </Link>
         <Player size={120} player={players[1]}  />
-        <div className='history_middle w-full h-[55vh] overflow-scroll '>
+        <div className='history_middle w-full h-[55vh] overflow-scroll scrollbar-hide'>
             {
               game_history.map(game => {
                   return <GameHistory key={game.game_id} game={game} />
@@ -99,13 +100,13 @@ export default function PlayerHistory() {
         </div>
         <div className='history_bottom text-2xl flex justify-around w-full'>
             <div className='flex flex-col'>
-              <span>ف - 2</span>
-              <span>خ - 3</span>
-              <span>ت - 1</span>
+              <span> {game_history.filter(game => parseInt( game.opponent_score) < parseInt( game.team_score)).length} - victoire</span>
+              <span> {game_history.filter(game => parseInt( game.opponent_score) > parseInt( game.team_score)).length} - défaite</span>
+              <span> {game_history.filter(game => parseInt( game.opponent_score) == parseInt( game.team_score)).length} - null</span>
             </div>
             <div className='flex flex-col justify-between'>
               <span className='flex gap-3'> <span>21</span> <img src="/images/futbol-solid.svg" alt="" /> </span>
-              <span>مباريات - 5</span>
+              <span>{game_history.length} - مباريات  </span>
             </div>
         </div>
         <BottomMenu />

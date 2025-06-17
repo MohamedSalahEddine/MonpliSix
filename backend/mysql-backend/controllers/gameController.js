@@ -168,9 +168,12 @@ id = parseInt(id, 10); // Ensures it's a real number
 console.log('id from req.params:', id, typeof id);
 
 
-const sql = ` SELECT g.id AS game_id, g.created_at AS date, tp.team_id, 
-              SUM(CASE WHEN tg.team_id = tp.team_id THEN 1 ELSE 0 END) AS team_score, 
-              SUM(CASE WHEN tg.team_id != tp.team_id THEN 1 ELSE 0 END) AS opponent_score, 
+const sql = ` SELECT  g.id                                                      AS game_id, 
+                      g.created_at                                              AS date, 
+                      g.start_datetime                                          AS start, 
+                      g.end_datetime                                            AS end, 
+              SUM(CASE WHEN tg.team_id = tp.team_id THEN 1 ELSE 0 END)          AS team_score, 
+              SUM(CASE WHEN tg.team_id != tp.team_id THEN 1 ELSE 0 END)         AS opponent_score, 
               CONCAT( SUM(CASE WHEN tg.team_id = tp.team_id THEN 1 ELSE 0 END), 
               ' - ', SUM(CASE WHEN tg.team_id != tp.team_id THEN 1 ELSE 0 END) ) AS score_display 
               FROM team_players tp 

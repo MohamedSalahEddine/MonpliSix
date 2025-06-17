@@ -6,8 +6,8 @@ export default function BottomMenu() {
 
     const[logged_id, setLoggedId] = useState(()=> {
         const token = localStorage.getItem("token")
-        const {idd} = JSON.parse(atob(token.split(".")[1]))
-        return idd
+        const {id} = JSON.parse(atob(token.split(".")[1]))
+        return id
     })
 
     const {id} = useParams()

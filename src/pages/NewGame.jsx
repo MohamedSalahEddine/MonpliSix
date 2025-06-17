@@ -12,6 +12,8 @@ export default function NewGame() {
   const [teamA, setTeamA] = useState(null)
   const [teamB, setTeamB] = useState(null)
   const [draggedPlayer, setDraggedPlayer] = useState(null)
+  const [game_on, setGameOn] = useState(false)
+  const [teams_confirmed, setTeamsConfirmed] = useState(false)
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -29,8 +31,8 @@ export default function NewGame() {
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
       setPlayers(data)     
-      setTeamA(data.slice(0, 7))
-      setTeamB(data.slice(7, 14))
+      setTeamA(data.slice(4, 12))
+      setTeamB(data.slice(12, 20))
     }
     loadPlayers()
   },[])
@@ -47,9 +49,12 @@ export default function NewGame() {
  
   
   const handleAnnuler = ()=>{
+    console.log("handle annuler");
     
+    setTeamA([])
+    setTeamB([])
   }
-
+  
   const handleConfirmer = async (e)=>{
     e.preventDefault()
     console.log("btn confirmer clicked");
@@ -68,6 +73,7 @@ export default function NewGame() {
         })
       }
     )
+    setTeamsConfirmed(true)
   }
 
   const handlePlayerClickedA = async (player) => {
@@ -130,8 +136,8 @@ export default function NewGame() {
 
         </div>
         <div className='feild relative h-[68vh] w-[90vw] m-auto'>
-          <div onDragEnd={handleDragEnd} className='team-A borr h-[34vh] flex flex-wrap'>
-            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {Math.round(teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
+          <div onDragEnd={handleDragEnd} className='team-A  h-[34vh] flex flex-wrap'>
+            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
               teamA && teamA.length > 0 &&  teamA.map(player => {
                 return (
@@ -142,8 +148,8 @@ export default function NewGame() {
               })
             }
           </div>
-          <div onDragEnd={handleDragEnd} className='team-B borr h-[34vh] flex flex-wrap'>
-            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {(teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
+          <div onDragEnd={handleDragEnd} className='team-B  h-[34vh] flex flex-wrap'>
+            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamB.length > 0 && (teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
             {
               teamB && teamB.length > 0 &&  teamB.map(player => {
                 return (
@@ -156,8 +162,20 @@ export default function NewGame() {
           </div>
         </div>
         <div className='flex justify-center gap-6 mb-2'>
-          <button onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
-          <button onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
+          {   
+            !game_on && !teams_confirmed && 
+            <>
+              <button disabled={teamA.length === 0 || teamA.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
+              <button disabled={teamA.length < 6   || teamA.length < 6  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
+            </>
+          }
+          {   
+            !game_on && teams_confirmed &&
+            <>
+              <button onClick={()=> setGameOn(true)} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
+            </>
+          }
+          
         </div>
         <BottomMenu />
     </div>
