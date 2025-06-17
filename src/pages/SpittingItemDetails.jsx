@@ -161,8 +161,8 @@ export default function SpittingItemDetails() {
     useEffect(() => {
         const loadData = async () => {
             const [resUsers, resItem] = await Promise.all([
-                fetch("http://localhost:3001/users/spittingUsers/"+id),
-                fetch("http://localhost:3001/spittingItems/"+id)
+                fetch("https://monplisix.onrender.com/users/spittingUsers/"+id),
+                fetch("https://monplisix.onrender.com/spittingItems/"+id)
             ])
 
             if (!resUsers.ok) throw new Error("Failed to fetch spitting users");
