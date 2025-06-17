@@ -5,7 +5,7 @@ import { getAllPlayers,  getPlayer, addPlayer  , authenticateToken} from "../con
 const playerRouter = express.Router()
 
 
-playerRouter.get("/" , authenticateToken, getAllPlayers)
+playerRouter.get("/" , getAllPlayers)
 playerRouter.get("/:id" , getPlayer)
 playerRouter.post("/" , addPlayer)
 

@@ -10,7 +10,7 @@ export default function Spitting() {
 
   useEffect(()=>{
     const loadData = async ()=>{
-        const  resItems = await fetch ("http://localhost:3001/spittingItems")
+        const  resItems = await fetch ("https://monplisix.onrender.com/spittingItems")
         if (!resItems.ok) throw new Error("Failed to fetch spitting Item");
         const dataItems = await resItems.json()
         setSpittingItem(dataItems)      

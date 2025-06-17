@@ -63,7 +63,7 @@ export default function PlayerHistory() {
   useEffect(()=>{
     const loadGames = async () => {
       try{
-        const res = await fetch("http://localhost:3001/games/gamesHistory/"+id)
+        const res = await fetch("https://monplisix.onrender.com/games/gamesHistory/"+id)
         const data = await res.json()
         // console.log(data);
         setGameHistory(data)

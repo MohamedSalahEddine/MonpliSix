@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 export default function Auth() {
 
 
-  const[username, setUsername] = useState("Alla")
-  const[password, setPassword] = useState("1838")
+  const[username, setUsername] = useState("")
+  const[password, setPassword] = useState("")
   const[message, setMessage] = useState("")
 
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ export default function Auth() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-        const res = await fetch("http://localhost:3001/users", {
+        const res = await fetch("https://monplisix.onrender.com/users", {
           method : "POST",
           headers : {"Content-Type":"application/json"},
           body : JSON.stringify({username, password})

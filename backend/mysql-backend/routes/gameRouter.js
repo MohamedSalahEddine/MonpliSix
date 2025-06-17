@@ -10,7 +10,7 @@ gameRouter.get("/score/:id", score)
 
 gameRouter.get("/gamesHistory/:id", getGamesHistory)
 gameRouter.get("/:id", getGameById)
-gameRouter.post("/", authenticateToken, addGame)
+gameRouter.post("/", addGame)
 
 
 export {gameRouter}

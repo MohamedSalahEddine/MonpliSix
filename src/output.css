@@ -655,6 +655,10 @@ img,
   height: 70vh;
 }
 
+.h-\[90vh\] {
+  height: 90vh;
+}
+
 .h-fit {
   height: -webkit-fit-content;
   height: fit-content;
@@ -1052,15 +1056,6 @@ img,
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
 }
 
 .bor{

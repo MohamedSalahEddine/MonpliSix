@@ -212,7 +212,7 @@ export default function SpittingItemDetails() {
         
         // Update in the database
         try {
-            const response = await fetch(`http://localhost:3001/users/markPaid/${draggedUser.id}/${id}`, {
+            const response = await fetch(`https://monplisix.onrender.com/users/markPaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ export default function SpittingItemDetails() {
         
         // Update in the database
         try {
-            const response = await fetch(`http://localhost:3001/users/markUnpaid/${draggedUser.id}/${id}`, {
+            const response = await fetch(`https://monplisix.onrender.com/users/markUnpaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

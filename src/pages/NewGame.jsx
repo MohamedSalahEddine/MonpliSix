@@ -20,7 +20,7 @@ export default function NewGame() {
     const loadPlayers = async ()=>{
 
       const token = localStorage.getItem('token')
-       const res = await fetch("http://localhost:3001/players", {
+       const res = await fetch("https://monplisix.onrender.com/players", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -60,7 +60,7 @@ export default function NewGame() {
     console.log("btn confirmer clicked");
     
     const token = localStorage.getItem("token")
-    const res = await fetch("http://localhost:3001/games",
+    const res = await fetch("https://monplisix.onrender.com/games",
       {
         method : "POST",
         headers : {
@@ -81,7 +81,7 @@ export default function NewGame() {
     try{
 
       console.log(player.name+" scored");
-      const res = await fetch("http://localhost:3001/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
       
@@ -95,7 +95,7 @@ export default function NewGame() {
     try{
       
       console.log(player.name+" scored");
-      const res = await fetch("http://localhost:3001/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
 
