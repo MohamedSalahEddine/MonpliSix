@@ -39,9 +39,7 @@ const login = async (req, res)=>{
         
         if(!permissions) return res.status(404).json({message : "permissions not found :/"})
         const permissions_list = permissions.map(permission => permission.name);
-        console.log("permissions_list :", permissions_list);
-        // console.log(typeof permissions_list);
-        
+     
         if(user.password !== password) return res.status(404).json({message : "wrong password"})
         
         const token = jwt.sign(
@@ -59,9 +57,7 @@ const login = async (req, res)=>{
     
 }
 
-const getAllUsers = async (req, res)=>{
-    console.log(req.user);
-    
+const getAllUsers = async (req, res)=>{    
    try{
         const sql = `select * from users`
         const [users] = await db.query(sql)
@@ -90,9 +86,7 @@ const getUser = async (req, res)=>{
     const id = req.params.id
     try{
         const sql = `select * from users where id=?`
-        const [user] = await db.query(sql, [id])
-        // console.log(user);
-        
+        const [user] = await db.query(sql, [id])        
         res.json(user)
         
     }catch(error){

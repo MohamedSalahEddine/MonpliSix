@@ -165,7 +165,7 @@ const getGamesHistory = async (req, res) => {
 
     let { id } = req.params;
 id = parseInt(id, 10); // Ensures it's a real number
-console.log('id from req.params:', id, typeof id);
+// console.log('id from req.params:', id, typeof id);
 
 
 const sql = ` SELECT  g.id                                                      AS game_id, 

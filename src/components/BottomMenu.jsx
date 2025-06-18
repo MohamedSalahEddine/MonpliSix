@@ -33,7 +33,7 @@ export default function BottomMenu() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/"  className="h-9 w-9 flex items-center justify-center">
+                        <Link to="/statistics"  className="h-9 w-9 flex items-center justify-center">
                             <img className='menu_icons' src="/images/chart-simple-solid.svg" alt="" />
                         </Link>
                     </li>
