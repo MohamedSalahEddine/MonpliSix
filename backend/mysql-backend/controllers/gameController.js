@@ -51,7 +51,7 @@ const addGame = async (req, res)=>{
 
 const score = async (req, res) => {
   const { id } = req.params;
-  console.log(id + " scoringg");
+  // console.log(id + " scoringg");
 
   const conn = await db.getConnection(); // get a manual connection for transaction
 

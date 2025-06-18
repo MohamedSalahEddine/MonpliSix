@@ -152,6 +152,8 @@ import BottomMenu from '../components/BottomMenu'
 import { useParams } from 'react-router-dom'
 import PLayer from "../components/Player.jsx"
 
+
+
 export default function SpittingItemDetails() {
     const [users, setUsers] = useState(null)
     const [item, setItem] = useState(null)
@@ -161,8 +163,8 @@ export default function SpittingItemDetails() {
     useEffect(() => {
         const loadData = async () => {
             const [resUsers, resItem] = await Promise.all([
-                fetch("https://monplisix.onrender.com/users/spittingUsers/"+id),
-                fetch("https://monplisix.onrender.com/spittingItems/"+id)
+                fetch(process.env.REACT_APP_API_URL+"/users/spittingUsers/"+id),
+                fetch(process.env.REACT_APP_API_URL+"/spittingItems/"+id)
             ])
 
             if (!resUsers.ok) throw new Error("Failed to fetch spitting users");
@@ -212,10 +214,12 @@ export default function SpittingItemDetails() {
         
         // Update in the database
         try {
-            const response = await fetch(`https://monplisix.onrender.com/users/markPaid/${draggedUser.id}/${id}`, {
+            const token= localStorage.getItem("token")
+            const response = await fetch(process.env.REACT_APP_API_URL+`/users/markPaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`
                 },
             })
             
@@ -242,10 +246,12 @@ export default function SpittingItemDetails() {
         
         // Update in the database
         try {
-            const response = await fetch(`https://monplisix.onrender.com/users/markUnpaid/${draggedUser.id}/${id}`, {
+            const token= localStorage.getItem("token")
+            const response = await fetch(process.env.REACT_APP_API_URL+`/users/markUnpaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': `Bearer ${token}`
                 },
             })
             

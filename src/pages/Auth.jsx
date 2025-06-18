@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import BottomMenu from '../components/BottomMenu'
+// import dotenv from "dotenv"
+
 
 import { useNavigate } from 'react-router-dom'
 
@@ -16,7 +18,7 @@ export default function Auth() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-        const res = await fetch("https://monplisix.onrender.com/users", {
+        const res = await fetch(process.env.REACT_APP_API_URL+"/users", {
           method : "POST",
           headers : {"Content-Type":"application/json"},
           body : JSON.stringify({username, password})

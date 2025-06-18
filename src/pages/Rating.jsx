@@ -6,6 +6,7 @@ import PlayerRating from "../components/PlayerRating"
 import players from '../db_players'
 
 
+
 export default function Rating() {
 
     const cn = `frame rating

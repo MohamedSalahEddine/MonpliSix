@@ -30,10 +30,22 @@ const login = async (req, res)=>{
         const user = users[0]
         if(!user) return res.status(404).json({message : "user not found :/"})
 
+        const [permissions] = await db.query(`  SELECT p.name
+                                                FROM users u
+                                                JOIN roles r ON u.role_id = r.id
+                                                JOIN role_permissions rp ON r.id = rp.role_id
+                                                JOIN permissions p ON rp.permission_id = p.id
+                                                WHERE u.id = ?`, [user.id])
+        
+        if(!permissions) return res.status(404).json({message : "permissions not found :/"})
+        const permissions_list = permissions.map(permission => permission.name);
+        console.log("permissions_list :", permissions_list);
+        // console.log(typeof permissions_list);
+        
         if(user.password !== password) return res.status(404).json({message : "wrong password"})
         
         const token = jwt.sign(
-            {id : user.id, username : user.username, role : user.role},
+            {id : user.id, username : user.username, permissions : permissions_list},
             process.env.JWT_SECRET,
             {expiresIn : "10h"}
         )
@@ -121,21 +133,6 @@ const markAsUnpaid =  async (req, res) => {
 }
 
 
-const authenticateToken = (req, res, next) => {
-    
-    const authHeader = req.headers["authorization"]
-    const token = authHeader && authHeader.split(" ")[1]
-    
-    if(!token) return res.status(401).json({ error : "access denied : token missing"})
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user)=>{
-        if(err){
-            return res.status(403).json({ error : "access denied: token invalid"})
-        }
-        req.user = user
-        next()
-    })
-    
-}
 
-export { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, markAsUnpaid, authenticateToken }
+export { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, markAsUnpaid }

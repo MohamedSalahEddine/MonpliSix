@@ -1,11 +1,12 @@
 import express from "express"
 
-import { getAllPlayers,  getPlayer, addPlayer  , authenticateToken} from "../controllers/playerController.js"
+import { getAllPlayers,  getPlayer, addPlayer  } from "../controllers/playerController.js"
+import { authenticateToken } from "../middleware/authenticateToken.js"
 
 const playerRouter = express.Router()
 
 
-playerRouter.get("/" , getAllPlayers)
+playerRouter.get("/" , authenticateToken, getAllPlayers)
 playerRouter.get("/:id" , getPlayer)
 playerRouter.post("/" , addPlayer)
 

@@ -1,14 +1,17 @@
 import express from "express"
 import { db } from "../db.js"
-import { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, markAsUnpaid, authenticateToken } from "../controllers/userController.js"
+import { register, login, getAllUsers, getSpittingUsers,  getUser, markAsPaid, markAsUnpaid } from "../controllers/userController.js"
+
+import {authenticateToken} from "../middleware/authenticateToken.js"
+import {hasPermission} from "../middleware/hasPermission.js"
 
 const  userRouter = express.Router()
 
-userRouter.get("/", getAllUsers)
+userRouter.get("/", authenticateToken,  getAllUsers)
 userRouter.get("/spittingUsers/:id", getSpittingUsers)
 
-userRouter.put('/markPaid/:userId/:itemId', markAsPaid);
-userRouter.put('/markUnpaid/:userId/:itemId', markAsUnpaid);
+userRouter.put('/markPaid/:userId/:itemId',authenticateToken, hasPermission("manage_spitting"), markAsPaid);
+userRouter.put('/markUnpaid/:userId/:itemId',authenticateToken, hasPermission("manage_spitting"), markAsUnpaid);
 
 userRouter.get("/:id", getUser)
 userRouter.post("/", login)

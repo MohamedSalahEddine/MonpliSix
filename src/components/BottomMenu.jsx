@@ -23,11 +23,13 @@ export default function BottomMenu() {
 
     return (
         <div className='bottom_menu w-full  bottom-0'>
+        
             <nav>
                 <ul className='flex justify-around '>
                     <li>
                         <Link to="/rating/" className="h-9 w-9 flex items-center justify-center">
                             <img className='menu_icons' src="/images/star-solid.svg" alt="" />
+                            <span className='text-red-400'>{logged_id}</span>
                         </Link>
                     </li>
                     <li>

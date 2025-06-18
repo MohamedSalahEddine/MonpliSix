@@ -1,7 +1,7 @@
 import express from "express"
 
 import {getAllGames, getGameById, addGame, score, getGamesHistory} from "../controllers/gameController.js"
-import { authenticateToken } from "../controllers/userController.js"
+import { authenticateToken } from "../middleware/authenticateToken.js"
 
 const gameRouter = express.Router()
 

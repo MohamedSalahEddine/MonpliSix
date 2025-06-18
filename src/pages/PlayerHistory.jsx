@@ -51,6 +51,8 @@ import games from "../db_games"
 import GameHistory from '../components/GameHistory'
 import { Link, useParams } from 'react-router-dom'
 
+
+
 export default function PlayerHistory() {
 
   const[game_history, setGameHistory] = useState(null)
@@ -63,7 +65,7 @@ export default function PlayerHistory() {
   useEffect(()=>{
     const loadGames = async () => {
       try{
-        const res = await fetch("https://monplisix.onrender.com/games/gamesHistory/"+id)
+        const res = await fetch(process.env.REACT_APP_API_URL+"/games/gamesHistory/"+id)
         const data = await res.json()
         // console.log(data);
         setGameHistory(data)
