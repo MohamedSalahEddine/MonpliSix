@@ -9,8 +9,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 export default function NewGame() {
 
   const [players, setPlayers] = useState(null)
-  const [teamA, setTeamA] = useState(null)
-  const [teamB, setTeamB] = useState(null)
+  const [teamA, setTeamA] = useState([])
+  const [teamB, setTeamB] = useState([])
   const [draggedPlayer, setDraggedPlayer] = useState(null)
   const [game_on, setGameOn] = useState(false)
   const [teams_confirmed, setTeamsConfirmed] = useState(false)
@@ -31,8 +31,7 @@ export default function NewGame() {
       if (!res.ok) throw new Error("Failed to fetch playersss");
       const data = await res.json()
       setPlayers(data)     
-      setTeamA(data.slice(4, 12))
-      setTeamB(data.slice(12, 20))
+      
     }
     loadPlayers()
   },[])
@@ -125,9 +124,12 @@ export default function NewGame() {
         </div>
         <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide'>
           {
-            players.map(player=>{
+            players.filter(p =>
+              !teamA.some(tp => tp.id === p.id) &&
+              !teamB.some(tp => tp.id === p.id)
+            ).map(player=>{
               return  (
-                <div className=' h-fit' draggable  key={player.id}>
+                <div className='movable h-fit' draggable onDragStart={() => setDraggedPlayer(player)}  key={player.id}>
                   <Player size={55}  player={player} onClick={() => handleClick(player)}/>
                 </div>
               )
@@ -136,7 +138,14 @@ export default function NewGame() {
 
         </div>
         <div className='feild relative h-[68vh] w-[90vw] m-auto'>
-          <div onDragEnd={handleDragEnd} className='team-A  h-[34vh] flex flex-wrap'>
+          <div onDragEnd={handleDragEnd} className='team-A  h-[34vh] flex flex-wrap'  onDragOver={(e) => e.preventDefault()}
+                onDrop={() => {
+                  if (draggedPlayer) {
+                    setTeamA(prev => [...prev, draggedPlayer]);
+                    setTeamB(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                    setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                  }
+                }}>
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
               teamA && teamA.length > 0 &&  teamA.map(player => {
@@ -148,7 +157,14 @@ export default function NewGame() {
               })
             }
           </div>
-          <div onDragEnd={handleDragEnd} className='team-B  h-[34vh] flex flex-wrap'>
+          <div onDragEnd={handleDragEnd} className='team-B  h-[34vh] flex flex-wrap' onDragOver={(e) => e.preventDefault()}
+            onDrop={() => {
+              if (draggedPlayer) {
+                setTeamB(prev => [...prev, draggedPlayer]);
+                setTeamA(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id)); // Optional: remove from top row
+              }
+            }}>
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamB.length > 0 && (teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
             {
               teamB && teamB.length > 0 &&  teamB.map(player => {
