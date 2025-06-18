@@ -1,10 +1,12 @@
 import React from 'react'
 
-export default function Player({player, size = 90, onClick, display_rating = true}) {
+export default function Player({player ={}, size = 90, onClick}) {
   
-  const {name, rating , selected, img  } = player
+  // console.log( "player :", player);
+  const { img, id, name, rating, selected  = false  } = player
   const img_src = img !==""? `/images/joueurs/${img}` : '/images/joueurs/camera-solid.svg'
 
+  
 
   function color_rating(){
     if(rating > 9){
@@ -52,7 +54,7 @@ export default function Player({player, size = 90, onClick, display_rating = tru
               // style={{width : `${size}px` , height:`${size}px`}} 
               className={`player_img rounded-full`} src={img_src} alt={'player img'}
             />
-            {display_rating &&<span style={{ height: size/3.5, width: size/3.5, 
+            {<span style={{ height: size/3.5, width: size/3.5, 
                                             //  maxHeight: size/3, maxWidth: size/3
             }} className={` rounded-full text-white ${color_rating()} flex items-center justify-center self-end mt-[-15px]`}>{ rating}</span>}
         </div>

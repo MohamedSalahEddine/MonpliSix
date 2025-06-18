@@ -169,6 +169,7 @@ id = parseInt(id, 10); // Ensures it's a real number
 
 
 const sql = ` SELECT  g.id                                                      AS game_id, 
+                      g.mvp_id                                                  AS mvp_id, 
                       g.created_at                                              AS date, 
                       g.start_datetime                                          AS start, 
                       g.end_datetime                                            AS end, 
@@ -197,4 +198,23 @@ return res.status(200).json(response);
   
 }
 
-export {getAllGames, getGameById, addGame, score, getGamesHistory}
+
+const getMVP = async (req, res) =>{
+  try{
+    const {id} = req.params
+    
+    const sql = `SELECT * FROM players where players.id = ?`
+    const [response] = await db.query(sql, [id])
+    if(!response){
+      return res.status(404).json({message : "no mvp yet"})
+    }
+    return res.status(200).json({mvp : response[0] })
+    
+  }catch(error){
+
+  }
+  
+  
+}
+
+export {getAllGames, getGameById, addGame, score, getGamesHistory, getMVP}

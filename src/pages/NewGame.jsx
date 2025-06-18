@@ -39,7 +39,7 @@ export default function NewGame() {
 
   
   const handleClick = (player) => {
-    console.log(player.id+ " clicked upon");
+    // console.log(player.id+ " clicked upon");
     navigate("/history/"+player.id)
   }
 

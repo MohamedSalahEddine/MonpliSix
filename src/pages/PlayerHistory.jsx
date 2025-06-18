@@ -73,11 +73,12 @@ export default function PlayerHistory() {
 
         ])
         const {profile} = dataProfile
-        console.log( profile);
+        // console.log( profile);
         // console.log(data);
         setGameHistory(dataGames)
         setProfile(profile)
         
+        console.log(dataGames);
         
       }catch(error){
         console.log(error);
@@ -90,37 +91,18 @@ export default function PlayerHistory() {
   }, [])
 
 
-  // useEffect(()=>{
-  //   const loadGames = async () => {
-  //     try{
-  //       const res = await fetch(process.env.REACT_APP_API_URL+"/games/gamesHistory/"+id)
-  //       const data = await res.json()
-  //       // console.log(data);
-  //       setGameHistory(data)
-        
-        
-  //     }catch(error){
-  //       console.log(error);
-        
-  //     }
-      
-  //   }
-
-  //   loadGames()
-  // }, [])
 
   const cn = `frame player_history 
               flex flex-col relative gap-3 items-center 
               text-white m-auto `
 
-  if(game_history === null) return "loading.."
-  
+  if(game_history === null ||profile === null) return "loading.."
   return (
     <div className={cn}>
           <Link to={"../"}>
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
           </Link>
-        <Player size={120} player={profile}  />
+        <Player  player={profile} size={120}  />
         <div className='history_middle w-full h-[55vh] overflow-scroll scrollbar-hide'>
             {
               game_history.map(game => {

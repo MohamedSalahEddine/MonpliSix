@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Player from './Player'
 
 import players from '../db_players'
@@ -8,8 +8,27 @@ import players from '../db_players'
 export default function GameHistory({game}) {
   
   // const [mine, dash, theirs] =  game.score.split("")
-  const {game_id, date, team_score, opponent_score, start, end } = game
+  const [mvp, setMVP] = useState(null)
+  const {game_id, date, team_score, opponent_score, start, end, mvp_id } = game
 
+
+  useEffect(()=>{
+    const loadData = async () =>{
+      try{
+        const res = await fetch(process.env.REACT_APP_API_URL+"/games/mvp/"+mvp_id)
+        const data = await res.json()
+        const {mvp} = data
+        setMVP(mvp)
+
+      }catch(error){
+        console.log(error);
+        
+      }
+      
+    }
+    loadData()
+  },[])
+  
   const mine = parseInt(team_score)
   const theirs = parseInt(opponent_score)
 
@@ -34,7 +53,8 @@ export default function GameHistory({game}) {
             <>
               <span>{5.2}</span>
               <span>{7.1}</span>
-              <Player size={40} player={players[0]}  />
+              { mvp && "mvp : "+   mvp.name  } 
+              { !mvp && "?"  } 
             </>
             
             
