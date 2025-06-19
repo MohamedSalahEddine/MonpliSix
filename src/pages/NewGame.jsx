@@ -19,7 +19,7 @@ export default function NewGame() {
   useEffect(() => {
     const savedTeamA = JSON.parse(localStorage.getItem("teamA"));
     const savedTeamB = JSON.parse(localStorage.getItem("teamB"));
-    if (savedTeamA.length>0 && savedTeamB.length>0) {
+    if (savedTeamA &&  savedTeamA.length>0 && savedTeamB && savedTeamB.length>0) {
       setTeamA(savedTeamA);
       setTeamB(savedTeamB);
     } else {
@@ -63,10 +63,10 @@ useEffect(() => {
  
   
   const handleAnnuler = () => {
-  setTeamA([]);
-  setTeamB([]);
-  localStorage.removeItem("teamA");
-  localStorage.removeItem("teamB");
+    setTeamA([]);
+    setTeamB([]);
+    localStorage.removeItem("teamA");
+    localStorage.removeItem("teamB");
 };
   
   const handleConfirmer = async (e)=>{
@@ -130,6 +130,7 @@ useEffect(() => {
 
   return (
     <div className={cn}>
+      holla
         <Link to={"../"}>
           <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
         </Link>
