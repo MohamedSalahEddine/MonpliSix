@@ -17,30 +17,30 @@ export default function NewGame() {
   const navigate = useNavigate()
 
   useEffect(() => {
-  const savedTeamA = JSON.parse(localStorage.getItem("teamA"));
-  const savedTeamB = JSON.parse(localStorage.getItem("teamB"));
-  if (savedTeamA && savedTeamB) {
-    setTeamA(savedTeamA);
-    setTeamB(savedTeamB);
-  } else {
-    const loadPlayers = async () => {
-      const token = localStorage.getItem("token");
-      const res = await fetch(process.env.REACT_APP_API_URL + "/players", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+    const savedTeamA = JSON.parse(localStorage.getItem("teamA"));
+    const savedTeamB = JSON.parse(localStorage.getItem("teamB"));
+    if (savedTeamA.length>0 && savedTeamB.length>0) {
+      setTeamA(savedTeamA);
+      setTeamB(savedTeamB);
+    } else {
+      const loadPlayers = async () => {
+        const token = localStorage.getItem("token");
+        const res = await fetch(process.env.REACT_APP_API_URL + "/players", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (!res.ok) throw new Error("Failed to fetch players");
-      const data = await res.json();
-      setPlayers(data);
-      
-    };
-    loadPlayers();
-  }
-}, []);
+        if (!res.ok) throw new Error("Failed to fetch players");
+        const data = await res.json();
+        setPlayers(data);
+        
+      };
+      loadPlayers();
+    }
+  }, []);
 
 useEffect(() => {
   if (teamA) localStorage.setItem("teamA", JSON.stringify(teamA));
