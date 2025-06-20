@@ -24,6 +24,7 @@ const register = async (req, res)=>{
 
 const login = async (req, res)=>{
     const {username, password } = req.body
+    console.log("hheyy", username);
     
     try{
         const [users] = await db.query(`SELECT * FROM users WHERE username = ?`, [username])
@@ -48,7 +49,7 @@ const login = async (req, res)=>{
             {expiresIn : "10h"}
         )
         
-        res.json({token})
+        return res.status(200).json({token})
         
     }catch(error){
         console.error("error : "+error)

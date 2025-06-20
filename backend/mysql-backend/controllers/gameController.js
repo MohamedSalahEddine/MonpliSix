@@ -18,6 +18,8 @@ const addGame = async (req, res)=>{
         // await db.query("delete from game")
        
         const {id:created_by} = req.user
+        console.log(created_by);
+        
         const sql0 = `INSERT INTO game (created_by, created_at) values (?, NOW())`
         const [response0] = await db.query(sql0, [created_by])
         const last_inserted_game = response0.insertId 

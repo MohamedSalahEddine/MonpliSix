@@ -19,13 +19,10 @@ export default function NewGame() {
   useEffect(() => {
     const savedTeamA = JSON.parse(localStorage.getItem("teamA"));
     const savedTeamB = JSON.parse(localStorage.getItem("teamB"));
-    if (savedTeamA &&  savedTeamA.length>0 && savedTeamB && savedTeamB.length>0) {
-      setTeamA(savedTeamA);
-      setTeamB(savedTeamB);
-    } else {
-      const loadPlayers = async () => {
+    
+    const loadPlayers = async () => {
         const token = localStorage.getItem("token");
-        const res = await fetch(process.env.REACT_APP_API_URL + "/players", {
+        const res = await fetch("https://monplisix.onrender.com/players", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,10 +33,13 @@ export default function NewGame() {
         if (!res.ok) throw new Error("Failed to fetch players");
         const data = await res.json();
         setPlayers(data);
-        
+        if (savedTeamA &&  savedTeamA.length>0 && savedTeamB && savedTeamB.length>0) {
+          setTeamA(savedTeamA);
+          setTeamB(savedTeamB);
+        }         
       };
       loadPlayers();
-    }
+    
   }, []);
 
 useEffect(() => {
@@ -74,7 +74,7 @@ useEffect(() => {
     console.log("btn confirmer clicked");
     
     const token = localStorage.getItem("token")
-    const res = await fetch(process.env.REACT_APP_API_URL+"/games",
+    const res = await fetch("https://monplisix.onrender.com/games",
       {
         method : "POST",
         headers : {
@@ -95,7 +95,7 @@ useEffect(() => {
     try{
 
       console.log(player.name+" scored");
-      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
       
@@ -109,7 +109,7 @@ useEffect(() => {
     try{
       
       console.log(player.name+" scored");
-      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
 
@@ -126,11 +126,11 @@ useEffect(() => {
               relative flex flex-col 
               text-white m-auto bor`
 
-  if(players === null) return "loadng"
+  if(players === null) return "loading.."
 
   return (
     <div className={cn}>
-      holla
+      
         <Link to={"../"}>
           <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
         </Link>

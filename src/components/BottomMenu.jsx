@@ -13,13 +13,7 @@ export default function BottomMenu() {
     const {id} = useParams()
     
 
-    useEffect(()=>{
-        const loadGames = async ()=>{
-            // const res = await fetch("http://localhost/games/gamesHistory/"+id)
-
-        }
-        loadGames()
-    }, [])
+   
 
     return (
         <div className='bottom_menu w-full  bottom-0'>
@@ -29,7 +23,6 @@ export default function BottomMenu() {
                     <li>
                         <Link to="/rating/" className="h-9 w-9 flex items-center justify-center">
                             <img className='menu_icons' src="/images/star-solid.svg" alt="" />
-                            <span className='text-red-400'>{logged_id}</span>
                         </Link>
                     </li>
                     <li>
