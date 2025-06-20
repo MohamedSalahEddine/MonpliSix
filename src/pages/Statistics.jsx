@@ -4,7 +4,7 @@ import BottomMenu from '../components/BottomMenu'
 export default function Statistics() {
   return (
     <div className='statistics frame flex flex-col'> 
-      <div className='container bor flex-1 flex items-center justify-center'>
+      <div className='container flex-1 flex items-center justify-center'>
         <span className='text-white'>Statictics</span>
       </div>
       <BottomMenu />

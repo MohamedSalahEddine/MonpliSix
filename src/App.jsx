@@ -20,7 +20,7 @@ function App() {
         <Route path="/spittingItemDetails/:id" element={<ProtectedRoute><SpittingItemDetails/></ProtectedRoute>}/>
         <Route path="/history/:id" element={<PlayerHistory/>}/>
         <Route path="/statistics" element={<Statistics />}/>
-        <Route path="/" element={<NewGame />}/>
+        <Route path="/" element={<Auth />}/>
         {/* <Route path="*" element={<NotFound />}/> */}
         <Route path="*" element={<Navigate to={"/"} replace/>}/>
       </Routes>

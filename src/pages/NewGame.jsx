@@ -124,7 +124,7 @@ useEffect(() => {
 
   const cn = `new_game frame
               flex flex-col 
-              text-white m-auto bor`
+              text-white m-auto`
 
   if(players === null) return "loading.."
 
@@ -149,54 +149,84 @@ useEffect(() => {
           
         </div>
         
-        <div className='feild relative h-[68vh] w-[92vw] m-auto'>
-          <div onDragEnd={handleDragEnd} className='team-A  h-[34vh] flex flex-wrap'  onDragOver={(e) => e.preventDefault()}
-                onDrop={() => {
-                  if (draggedPlayer) {
-                    setTeamA(prev => [...prev, draggedPlayer]);
-                    setTeamB(prev => prev.filter(p => p.id !== draggedPlayer.id));
-                    setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id));
-                  }
-                }}>
+        <div className='feild  h-[68vh] w-[92vw] m-auto'>
+          <div onDragEnd={handleDragEnd} className='team-A relative h-[34vh] flex flex-wrap '  onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                          e.preventDefault();
+                          if (draggedPlayer) {
+                            const container = e.currentTarget.getBoundingClientRect();
+                            const x = e.clientX - container.left - draggedPlayer.offsetX;
+                            const y = e.clientY - container.top - draggedPlayer.offsetY;
+
+                            setTeamA(prev => [...prev, { ...draggedPlayer, x, y }]);
+                            setTeamB(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                            setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                            setDraggedPlayer(null);
+                          }
+                        }}
+          >
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
-              teamA && teamA.length > 0 &&  teamA.map(player => {
-                return (
-                <div key={player.id} onClick={() => handlePlayerClickedA(player)}>
-                  <Player key={player.id} player={player} size={40}/>
+              teamA && teamA.length > 0 &&  teamA.map(player => (
+                <div
+                  key={player.id}
+                  onClick={() => handlePlayerClickedA(player)}
+                  className='absolute'
+                  style={{ left: player.x, top: player.y }}
+                >
+                  <Player player={player} size={40} />
                 </div>
-                );
-              })
+              ))
             }
           </div>
           
-          <div onDragEnd={handleDragEnd} className='team-B  h-[34vh] flex flex-wrap' onDragOver={(e) => e.preventDefault()}
-            onDrop={() => {
-              if (draggedPlayer) {
-                setTeamB(prev => [...prev, draggedPlayer]);
-                setTeamA(prev => prev.filter(p => p.id !== draggedPlayer.id));
-                setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id)); // Optional: remove from top row
-              }
-            }}>
+          <div onDragEnd={handleDragEnd} className='team-B relative h-[34vh] flex flex-wrap' onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+                    e.preventDefault();
+                    if (draggedPlayer) {
+                      const container = e.currentTarget.getBoundingClientRect();
+                      const x = e.clientX - container.left - draggedPlayer.offsetX;
+                      const y = e.clientY - container.top - draggedPlayer.offsetY;
+
+                      setTeamB(prev => [...prev, { ...draggedPlayer, x, y }]);
+                      setTeamA(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                      setPlayers(prev => prev.filter(p => p.id !== draggedPlayer.id));
+                      setDraggedPlayer(null);
+                    }
+                  }}
+
+            >
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamB.length > 0 && (teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
             {
-              teamB && teamB.length > 0 &&  teamB.map(player => {
-                return (
-                <div key={player.id} onClick={() => handlePlayerClickedB(player)}>
-                  <Player key={player.id} player={player} size={40}/>
+              teamB && teamB.length > 0 &&  teamB.map(player => (
+                <div
+                  key={player.id}
+                  onClick={() => handlePlayerClickedB(player)}
+                  className='absolute'
+                  style={{ left: player.x, top: player.y }}
+                >
+                  <Player player={player} size={40} />
                 </div>
-                );
-              })
+              ))
             }
           </div>
-          <div className='flex gap-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide borr py-3'>
+          <div className='flex gap-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide py-3'>
             {
               players.filter(p =>
                 !teamA.some(tp => tp.id === p.id) &&
                 !teamB.some(tp => tp.id === p.id)
               ).map(player=>{
                 return  (
-                  <div className='movable h-fit' draggable onDragStart={() => setDraggedPlayer(player)}  key={player.id}>
+                  <div className='movable h-fit' draggable onDragStart={(e) => {
+                      const rect = e.target.getBoundingClientRect();
+                      setDraggedPlayer({
+                        ...player,
+                        offsetX: e.clientX - rect.left,
+                        offsetY: e.clientY - rect.top
+                      });
+                    }}
+                    key={player.id}
+                  >
                     <Player size={55}  player={player} onClick={() => handleClick(player)}/>
                   </div>
                 )

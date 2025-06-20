@@ -17,7 +17,7 @@ export default function Rating() {
             <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
         </Link>
     
-        <div className='rating_container flex flex-wrap justify-center bor gap-2'>
+        <div className='rating_container flex flex-wrap justify-center gap-2'>
             {
                 players.filter(player => true ).map(player =>{
                     return <PlayerRating key={player.name} player={player}/>
