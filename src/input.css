@@ -21,7 +21,7 @@
 
 .frame{
     position: relative;
-    height: 92vh;
+    height: 94vh;
     background:linear-gradient(130deg, #1B2D37, #5D6E75);
 }
 
@@ -91,6 +91,13 @@
 
 button:disabled{
     background-color: #5D6E75;
+}
+
+
+img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 /* 
 .player img{

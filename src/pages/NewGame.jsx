@@ -22,7 +22,7 @@ export default function NewGame() {
     
     const loadPlayers = async () => {
         const token = localStorage.getItem("token");
-        const res = await fetch( process.env.REACT_APP_API_URL+"/players", {
+        const res = await fetch("https://monplisix.onrender.com/players", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ useEffect(() => {
     console.log("btn confirmer clicked");
     
     const token = localStorage.getItem("token")
-    const res = await fetch( process.env.REACT_APP_API_URL+"/games",
+    const res = await fetch("https://monplisix.onrender.com/games",
       {
         method : "POST",
         headers : {
@@ -95,7 +95,7 @@ useEffect(() => {
     try{
 
       console.log(player.name+" scored");
-      const res = await fetch( process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      const res = await fetch( "https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
       
@@ -107,8 +107,9 @@ useEffect(() => {
   
   const handlePlayerClickedB = async (player) => {
     try{
+      
       console.log(player.name+" scored");
-      const res = await fetch( process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
 

@@ -15,7 +15,7 @@ export default function GameHistory({game}) {
   useEffect(()=>{
     const loadData = async () =>{
       try{
-        const res = await fetch( process.env.REACT_APP_API_URL+"/games/mvp/"+mvp_id)
+        const res = await fetch("https://monplisix.onrender.com/games/mvp/"+mvp_id)
         const data = await res.json()
         const {mvp} = data
         setMVP(mvp)
