@@ -39,8 +39,6 @@ const getProfile = async (req, res) => {
         return res.status(500).json({message : "problem retriving a profile"})
         
     }
-    
-    
 }
 
 
