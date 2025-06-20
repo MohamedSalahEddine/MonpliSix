@@ -625,16 +625,12 @@ img,
   margin: 0.25rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-auto {
   margin: auto;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mr-20 {
-  margin-right: 5rem;
 }
 
 .mt-2 {
@@ -643,10 +639,6 @@ img,
 
 .mt-4 {
   margin-top: 1rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
 }
 
 .mt-\[-15px\] {
@@ -726,8 +718,8 @@ img,
   width: 90%;
 }
 
-.w-\[90vw\] {
-  width: 90vw;
+.w-\[92vw\] {
+  width: 92vw;
 }
 
 .w-fit {
@@ -995,6 +987,11 @@ img,
   padding-bottom: 0.5rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1096,15 +1093,6 @@ img,
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
 .bor{
   border: 2px solid green;
 }
@@ -1115,7 +1103,7 @@ img,
 
 .frame{
   position: relative;
-  height: 92vh;
+  height: 93vh;
   background:linear-gradient(130deg, #1B2D37, #5D6E75);
 }
 
@@ -1185,6 +1173,12 @@ img,
 
 button:disabled{
   background-color: #5D6E75;
+}
+
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* 

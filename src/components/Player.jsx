@@ -53,6 +53,16 @@ export default function Player({player ={}, size = 90, onClick}) {
               style={{width :  '70%'}} 
               // style={{width : `${size}px` , height:`${size}px`}} 
               className={`player_img rounded-full`} src={img_src} alt={'player img'}
+              onContextMenu={(e) => e.preventDefault()}
+              onTouchStart={(e) => {
+                e.currentTarget.pressTimer = setTimeout(() => e.preventDefault(), 300);
+              }}
+              onTouchEnd={(e) => {
+                clearTimeout(e.currentTarget.pressTimer);
+              }}
+              onTouchMove={(e) => {
+                clearTimeout(e.currentTarget.pressTimer);
+              }}
             />
             {<span style={{ height: size/3.5, width: size/3.5, 
                                             //  maxHeight: size/3, maxWidth: size/3

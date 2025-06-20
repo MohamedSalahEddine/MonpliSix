@@ -123,37 +123,33 @@ useEffect(() => {
 
 
   const cn = `new_game frame
-              relative flex flex-col 
+              flex flex-col 
               text-white m-auto bor`
 
   if(players === null) return "loading.."
 
   return (
     <div className={cn}>
-      
-        <Link to={"../"}>
-          <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
-        </Link>
-        <div className='flex items-center justify-between'>
-          {/* <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => player.selected).length} </p> */}
-          <p className='absolute right-2 top-2 text-right text-red-400 mr-20 text-xl'>Selectionnés : {players.filter(player => true).length} </p>
-        </div>
-        <div className='flex mt-8 gap-2 py-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide'>
-          {
-            players.filter(p =>
-              !teamA.some(tp => tp.id === p.id) &&
-              !teamB.some(tp => tp.id === p.id)
-            ).map(player=>{
-              return  (
-                <div className='movable h-fit' draggable onDragStart={() => setDraggedPlayer(player)}  key={player.id}>
-                  <Player size={55}  player={player} onClick={() => handleClick(player)}/>
-                </div>
-              )
-            })
-          }
+      <div className='container top flex-1'>
 
+        <div className='flex justify-center gap-6 m-2'>
+          {   
+            !game_on && !teams_confirmed && 
+            <>
+              <button disabled={teamA.length === 0 || teamA.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
+              <button disabled={teamA.length < 6   || teamA.length < 6  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
+            </>
+          }
+          {   
+            !game_on && teams_confirmed &&
+            <>
+              <button onClick={()=> setGameOn(true)} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
+            </>
+          }
+          
         </div>
-        <div className='feild relative h-[68vh] w-[90vw] m-auto'>
+        
+        <div className='feild relative h-[68vh] w-[92vw] m-auto'>
           <div onDragEnd={handleDragEnd} className='team-A  h-[34vh] flex flex-wrap'  onDragOver={(e) => e.preventDefault()}
                 onDrop={() => {
                   if (draggedPlayer) {
@@ -173,6 +169,7 @@ useEffect(() => {
               })
             }
           </div>
+          
           <div onDragEnd={handleDragEnd} className='team-B  h-[34vh] flex flex-wrap' onDragOver={(e) => e.preventDefault()}
             onDrop={() => {
               if (draggedPlayer) {
@@ -192,24 +189,23 @@ useEffect(() => {
               })
             }
           </div>
+          <div className='flex gap-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide borr py-3'>
+            {
+              players.filter(p =>
+                !teamA.some(tp => tp.id === p.id) &&
+                !teamB.some(tp => tp.id === p.id)
+              ).map(player=>{
+                return  (
+                  <div className='movable h-fit' draggable onDragStart={() => setDraggedPlayer(player)}  key={player.id}>
+                    <Player size={55}  player={player} onClick={() => handleClick(player)}/>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
-        <div className='flex justify-center gap-6 mb-2'>
-          {   
-            !game_on && !teams_confirmed && 
-            <>
-              <button disabled={teamA.length === 0 || teamA.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
-              <button disabled={teamA.length < 6   || teamA.length < 6  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
-            </>
-          }
-          {   
-            !game_on && teams_confirmed &&
-            <>
-              <button onClick={()=> setGameOn(true)} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
-            </>
-          }
-          
-        </div>
-        <BottomMenu />
+      </div>
+      <BottomMenu />
     </div>
   )
 }
