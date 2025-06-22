@@ -43,7 +43,7 @@ export default function GameHistory({game}) {
       <div className='flex flex-[.7] justify-evenly items-center'>
       
         {
-          !start && !end && "Commence bientot.."
+          !start && !end && "Commence bientot "
         }
         {
           start && !end && "En cours.."

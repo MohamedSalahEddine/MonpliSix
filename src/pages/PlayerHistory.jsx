@@ -92,25 +92,24 @@ export default function PlayerHistory() {
 
 
 
-  const cn = `frame player_history 
-              flex flex-col relative gap-3 items-center 
-              text-white m-auto `
 
   if(game_history === null ||profile === null) return "loading.."
   return (
-    <div className={cn}>
-          <Link to={"../"}>
-            <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
-          </Link>
+    <div className="frame player_history flex flex-col">
+      <div className='container flex flex-col flex-1 items-center  text-white m-auto '>
+
+        <Link to={"../"}>
+          <img className='absolute left-2 top-2 icon_left' src="/images/arrow-left-solid.svg" alt="" />
+        </Link>
         <Player  player={profile} size={120}  />
-        <div className='history_middle w-full h-[55vh] overflow-scroll scrollbar-hide'>
+        <div className='history_middle w-full flex-1 overflow-scroll scrollbar-hide'>
             {
               game_history.map(game => {
                   return <GameHistory key={game.game_id} game={game} />
               })
             }
         </div>
-        <div className='history_bottom text-2xl flex justify-around w-full'>
+        <div className='history_bottom text-2xl flex justify-around w-full mb-2'>
             <div className='flex flex-col'>
               <span> {game_history.filter(game => parseInt( game.opponent_score) < parseInt( game.team_score)).length} - victoire</span>
               <span> {game_history.filter(game => parseInt( game.opponent_score) > parseInt( game.team_score)).length} - défaite</span>
@@ -121,7 +120,8 @@ export default function PlayerHistory() {
               <span>{game_history.length} - مباريات  </span>
             </div>
         </div>
-        <BottomMenu />
+      </div>
+      <BottomMenu />
     </div>
   )
 }
