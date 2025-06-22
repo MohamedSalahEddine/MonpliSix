@@ -16,6 +16,7 @@ export default function GameHistory({game}) {
     const loadData = async () =>{
       try{
         const res = await fetch("https://monplisix.onrender.com/games/mvp/"+mvp_id)
+        // const res = await fetch("https://monplisix.onrender.com/games/mvp/"+mvp_id)
         const data = await res.json()
         const {mvp} = data
         setMVP(mvp)

@@ -34,6 +34,8 @@ export default function NewGame() {
         const data = await res.json();
         setPlayers(data);
         if (savedTeamA &&  savedTeamA.length>0 && savedTeamB && savedTeamB.length>0) {
+          console.log("yes");
+          
           setTeamA(savedTeamA);
           setTeamB(savedTeamB);
         }         
@@ -95,7 +97,7 @@ useEffect(() => {
     try{
 
       console.log(player.name+" scored");
-      const res = await fetch( "https://monplisix.onrender.com/games/score/"+player.id)
+      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
       

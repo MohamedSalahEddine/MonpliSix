@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Player({player ={}, size = 90, onClick}) {
+export default function Player({player ={}, display_rating=true, size = 90, onClick}) {
   
   // console.log( "player :", player);
   const { img, id, name, rating, selected  = false  } = player
@@ -64,7 +64,9 @@ export default function Player({player ={}, size = 90, onClick}) {
                 clearTimeout(e.currentTarget.pressTimer);
               }}
             />
-            {<span style={{ height: size/3.5, width: size/3.5, 
+            {
+              display_rating && 
+              <span style={{ height: size/3.5, width: size/3.5, 
                                             //  maxHeight: size/3, maxWidth: size/3
             }} className={` rounded-full text-white ${color_rating()} flex items-center justify-center self-end mt-[-15px]`}>{ rating}</span>}
         </div>
