@@ -75,15 +75,15 @@ const getAvgGameGoals = async (req, res) =>{
   )
    AS value
         FROM 
-        Players p
+        players p
         LEFT JOIN 
-        Team_Players tp ON p.id = tp.player_id
+        team_players tp ON p.id = tp.player_id
         LEFT JOIN 
-        Teams t ON tp.team_id = t.id
+        teams t ON tp.team_id = t.id
         LEFT JOIN 
-        Game gm ON t.game_id = gm.id
+        game gm ON t.game_id = gm.id
         LEFT JOIN 
-        Goals g ON p.id = g.player_id
+        goals g ON p.id = g.player_id
         GROUP BY 
         p.id, p.name
         ORDER BY 
