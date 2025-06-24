@@ -2,7 +2,7 @@ import React from 'react'
 import Player from "./Player"
 
 export default function StatisticsEntry({order, entry}) {
-  const {name, value} = entry
+  const {name = "no name", value = "0"} = entry
   
   return (
     <div className='flex justify-between w-fit  min-w-28 mt-2'>

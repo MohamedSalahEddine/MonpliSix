@@ -35,9 +35,9 @@ export default function Statistics() {
       ]) 
 
       
-      console.log("all time", data_all_time_goals);
-      console.log(data_last_game_goals);
-      console.log(data_avg_game_goals);
+      // console.log("all time", data_all_time_goals);
+      // console.log(data_last_game_goals);
+      // console.log(data_avg_game_goals);
       
       setAllTimeGoals(data_all_time_goals.data);
       setLastGameGoals(data_last_game_goals.data);
