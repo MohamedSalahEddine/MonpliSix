@@ -29,7 +29,6 @@ const getAllTimeGoals = async (req, res) =>{
                                 value  ASC
                             LIMIT 1
                         )`
-
         const [data] = await db.query(sql)
         if (!data) return res.status(404).json({message : "no stats found"})
         // console.log(res);
@@ -95,7 +94,7 @@ const getAvgGameGoals = async (req, res) =>{
                         players p
                     LEFT JOIN goals g ON
                         p.id = g.player_id AND g.own_goal = 0
-                    LEFT JOIN Team_Players tp ON
+                    LEFT JOIN team_players tp ON
                         p.id = tp.player_id
                     LEFT JOIN teams t ON
                         tp.team_id = t.id
