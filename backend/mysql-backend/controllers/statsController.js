@@ -4,7 +4,6 @@ const getAllTimeGoals = async (req, res) =>{
     try{
         const sql =   `(
                             SELECT
-                                
                                 players.name,
                                 COUNT(goals.player_id) AS value
                             FROM
@@ -65,22 +64,6 @@ const getLastGameGoals = async (req, res) =>{
     }
 }
 
-
-
-// SELECT 
-//   p.name,
-//   COUNT(CASE WHEN g.own_goal = 0 THEN g.id END) AS total_goals,
-//   COUNT(DISTINCT t.game_id) AS total_games
-// FROM 
-//   players p
-// LEFT JOIN 
-//   goals g ON p.id = g.player_id
-// LEFT JOIN 
-//   team_players tp ON p.id = tp.player_id
-// LEFT JOIN 
-//   teams t ON tp.team_id = t.id
-// GROUP BY 
-//   p.id, p.name;
 
 
 const getAvgGameGoals = async (req, res) =>{

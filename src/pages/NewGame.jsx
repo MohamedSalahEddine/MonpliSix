@@ -44,13 +44,13 @@ export default function NewGame() {
     
   }, []);
 
-useEffect(() => {
-  if (teamA) localStorage.setItem("teamA", JSON.stringify(teamA));
-}, [teamA]);
+  useEffect(() => {
+    if (teamA) localStorage.setItem("teamA", JSON.stringify(teamA));
+  }, [teamA]);
 
-useEffect(() => {
-  if (teamB) localStorage.setItem("teamB", JSON.stringify(teamB));
-}, [teamB]);
+  useEffect(() => {
+    if (teamB) localStorage.setItem("teamB", JSON.stringify(teamB));
+  }, [teamB]);
 
 
   
@@ -138,8 +138,8 @@ useEffect(() => {
           {   
             !game_on && !teams_confirmed && 
             <>
-              <button disabled={teamA.length === 0 || teamA.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
-              <button disabled={teamA.length < 6   || teamA.length < 6  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
+              <button disabled={teamA.length === 0 && teamB.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
+              <button disabled={teamA.length < 5   || teamB.length < 5  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
             </>
           }
           {   

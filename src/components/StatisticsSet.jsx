@@ -2,6 +2,7 @@ import React from 'react'
 import StatisticsEntry from './StatisticsEntry'
 
 export default function StatisticsSet({title, set}) {
+  console.log(title, set);
   
   if( set.length === 0 || set.some(entry =>  Object.keys(entry).includes(null) ||  Object.values(entry).includes(null) ) ) return "no data"
   // if( set.length === 0 || set.some(entry =>  Object.keys(entry).includes(null) ||  Object.values(entry).includes(null) ) ) return "no data"
