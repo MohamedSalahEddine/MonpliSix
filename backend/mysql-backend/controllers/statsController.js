@@ -29,6 +29,7 @@ const getAllTimeGoals = async (req, res) =>{
                                 value  ASC
                             LIMIT 1
                         )`
+
         const [data] = await db.query(sql)
         if (!data) return res.status(404).json({message : "no stats found"})
         // console.log(res);
@@ -85,30 +86,24 @@ const getLastGameGoals = async (req, res) =>{
 
 const getAvgGameGoals = async (req, res) =>{
     try{
-        const sql = `SELECT 
-  p.name,
-  ROUND(
-    COUNT(CASE WHEN g.own_goal = 0 THEN g.id END)
-   / COUNT(DISTINCT tp.team_id) ,
-   1
-  )
-   AS value
-        FROM 
-        players p
-        LEFT JOIN 
-        team_players tp ON p.id = tp.player_id
-        LEFT JOIN 
-        teams t ON tp.team_id = t.id
-        LEFT JOIN 
-        game gm ON t.game_id = gm.id
-        LEFT JOIN 
-        goals g ON p.id = g.player_id
-        GROUP BY 
-        p.id, p.name
-        ORDER BY 
-        value DESC
-        LIMIT 3;
-        `
+        const sql = `SELECT
+                        p.name,
+                        ROUND(
+                            COUNT( DISTINCT CASE WHEN g.own_goal = 0 THEN g.id END ) / COUNT(DISTINCT t.game_id)
+                        , 1) AS value
+                    FROM
+                        players p
+                    LEFT JOIN goals g ON
+                        p.id = g.player_id AND g.own_goal = 0
+                    LEFT JOIN Team_Players tp ON
+                        p.id = tp.player_id
+                    LEFT JOIN teams t ON
+                        tp.team_id = t.id
+                    GROUP BY
+                        p.id,
+                        p.name
+                    ORDER BY VALUE DESC
+                    LIMIT 3`
         const [data] = await db.query(sql)
         if (!data) return res.status(404).json({message : "no stats found"})
 
