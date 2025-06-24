@@ -11,6 +11,7 @@ import { playerRouter } from "./routes/playerRouter.js"
 import { spittingItemsRouter } from "./routes/spittingItemsRouter.js"
 import { gameRouter } from "./routes/gameRouter.js"
 import { statsRouter } from "./routes/statsRouter.js"
+import { ratingRouter } from "./routes/ratingRouter.js"
 
 const app = express()
 app.use(express.json())
@@ -20,6 +21,7 @@ app.use(cors())
 app.use("/users", userRouter)
 app.use("/players", playerRouter)
 app.use("/games", gameRouter)
+app.use("/rating", ratingRouter)
 app.use("/stats", statsRouter)
 app.use("/spittingItems", spittingItemsRouter)
 

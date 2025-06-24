@@ -17,7 +17,7 @@ export default function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    localStorage.clear()
+    // localStorage.clear()
     try{
         const res = await fetch("https://monplisix.onrender.com/users", {
           method : "POST",
