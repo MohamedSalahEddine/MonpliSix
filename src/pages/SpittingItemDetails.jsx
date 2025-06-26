@@ -163,8 +163,10 @@ export default function SpittingItemDetails() {
     useEffect(() => {
         const loadData = async () => {
             const [resUsers, resItem] = await Promise.all([
-                fetch("https://monplisix.onrender.com/users/spittingUsers/"+id),
-                fetch("https://monplisix.onrender.com/spittingItems/"+id)
+                // fetch("https://monplisix.onrender.com/users/spittingUsers/"+id),
+                fetch(process.env.REACT_APP_API_URL+"/users/spittingUsers/"+id),
+                // fetch("https://monplisix.onrender.com/spittingItems/"+id)
+                fetch(process.env.REACT_APP_API_URL+"/spittingItems/"+id)
             ])
 
             if (!resUsers.ok) throw new Error("Failed to fetch spitting users");
@@ -215,7 +217,8 @@ export default function SpittingItemDetails() {
         // Update in the database
         try {
             const token= localStorage.getItem("token")
-            const response = await fetch(`https://monplisix.onrender.com/users/markPaid/${draggedUser.id}/${id}`, {
+            // const response = await fetch(`https://monplisix.onrender.com/users/markPaid/${draggedUser.id}/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/markPaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -247,7 +250,8 @@ export default function SpittingItemDetails() {
         // Update in the database
         try {
             const token= localStorage.getItem("token")
-            const response = await fetch(`https://monplisix.onrender.com/users/markUnpaid/${draggedUser.id}/${id}`, {
+            // const response = await fetch(`https://monplisix.onrender.com/users/markUnpaid/${draggedUser.id}/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/markUnpaid/${draggedUser.id}/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

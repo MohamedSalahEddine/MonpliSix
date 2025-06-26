@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BottomMenu from '../components/BottomMenu'
 // import playersData from "../db_players"
 import Player from '../components/Player'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -12,8 +12,10 @@ export default function NewGame() {
   const [teamA, setTeamA] = useState([])
   const [teamB, setTeamB] = useState([])
   const [draggedPlayer, setDraggedPlayer] = useState(null)
-  const [game_on, setGameOn] = useState(false)
-  const [teams_confirmed, setTeamsConfirmed] = useState(false)
+  const [game_ending , setGameEnding] = useState(false)
+  const [game_state, setGameState] = useState(()=>{
+    return localStorage.getItem("game_state") || "preparing"
+  })
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,11 +24,12 @@ export default function NewGame() {
     
     const loadPlayers = async () => {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://monplisix.onrender.com/players", {
+        // const res = await fetch("https://monplisix.onrender.com/players", {
+        const res = await fetch(process.env.REACT_APP_API_URL+"/players", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -34,14 +37,13 @@ export default function NewGame() {
         const data = await res.json();
         setPlayers(data);
         if (savedTeamA &&  savedTeamA.length>0 && savedTeamB && savedTeamB.length>0) {
-          console.log("yes");
-          
           setTeamA(savedTeamA);
           setTeamB(savedTeamB);
         }         
-      };
-      loadPlayers();
-    
+    };
+
+    loadPlayers();
+
   }, []);
 
   useEffect(() => {
@@ -52,7 +54,9 @@ export default function NewGame() {
     if (teamB) localStorage.setItem("teamB", JSON.stringify(teamB));
   }, [teamB]);
 
-
+  useEffect(()=>{
+    if(game_state) localStorage.setItem("game_state", game_state)
+  }, [game_state])
   
   const handleClick = (player) => {
     // console.log(player.id+ " clicked upon");
@@ -73,10 +77,10 @@ export default function NewGame() {
   
   const handleConfirmer = async (e)=>{
     e.preventDefault()
-    console.log("btn confirmer clicked");
-    
     const token = localStorage.getItem("token")
-    const res = await fetch("https://monplisix.onrender.com/games",
+    
+    // const res = await fetch("https://monplisix.onrender.com/games",
+    const res = await fetch(process.env.REACT_APP_API_URL+"/games",
       {
         method : "POST",
         headers : {
@@ -89,16 +93,14 @@ export default function NewGame() {
         })
       }
     )
-    setTeamsConfirmed(true)
+    setGameState("confirmed")
   }
 
   const handlePlayerClickedA = async (player) => {
     
     try{
-
-      console.log(player.name+" scored");
-      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
-      console.log(res);
+      // const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
       const data = await res.json()
       
     }catch(error){
@@ -111,7 +113,8 @@ export default function NewGame() {
     try{
       
       console.log(player.name+" scored");
-      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
+      // const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
 
@@ -121,6 +124,25 @@ export default function NewGame() {
       
     }
     
+  }
+
+  const endGame = async ()=>{
+    
+    if(!window.confirm("are you sure ? ")) return
+    const token = localStorage.getItem("token")
+    // const res = await fetch("https://monplisix.onrender.com/games/end_game", 
+    const res = await fetch(process.env.REACT_APP_API_URL+"/games/end_game", 
+      {
+        method :"POST",
+        headers : {
+          "Content-Type": "application/json",
+          "Authorization" :  `Bearer ${token}`
+        }
+      }
+    )
+    setGameState("preparing")
+    setTeamA([])
+    setTeamB([])
   }
 
 
@@ -136,16 +158,22 @@ export default function NewGame() {
 
         <div className='flex justify-center gap-6 m-2'>
           {   
-            !game_on && !teams_confirmed && 
+            game_state === "preparing" &&
             <>
               <button disabled={teamA.length === 0 && teamB.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
               <button disabled={teamA.length < 5   || teamB.length < 5  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
             </>
           }
           {   
-            !game_on && teams_confirmed &&
+             game_state === "confirmed" &&
             <>
-              <button onClick={()=> setGameOn(true)} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
+              <button onClick={()=> setGameState("on")} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
+            </>
+          }
+          {   
+             game_state === "on" &&
+            <>
+              <button onClick={endGame} className='bg-red-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>end game</button>
             </>
           }
           

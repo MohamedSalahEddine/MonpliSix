@@ -18,9 +18,12 @@ export default function Statistics() {
               res_avg_game_goals,
             ] = await Promise.all(
               [
-                fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
-                fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
+                // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/goals"),
+                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/goals"),
 
               ]
             ) 

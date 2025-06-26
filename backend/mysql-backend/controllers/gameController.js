@@ -219,4 +219,10 @@ const getMVP = async (req, res) =>{
   
 }
 
-export {getAllGames, getGameById, addGame, score, getGamesHistory, getMVP}
+
+const endGame = async () =>{
+  console.log("ending game");
+  
+}
+
+export {getAllGames, getGameById, addGame, score, getGamesHistory, getMVP, endGame}
