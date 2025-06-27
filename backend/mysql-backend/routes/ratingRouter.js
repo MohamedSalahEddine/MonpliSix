@@ -1,5 +1,5 @@
 import express from "express"
-import {getPlayersRatings, setPlayersRatings} from "../controllers/ratingRouter.js"
+import {getPlayersRatings, setPlayersRatings} from "../controllers/ratingController.js"
 import { authenticateToken } from "../middleware/authenticateToken.js"
 
 const ratingRouter = express.Router()

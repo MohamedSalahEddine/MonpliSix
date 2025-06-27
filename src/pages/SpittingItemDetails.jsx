@@ -16,8 +16,8 @@
 //     useEffect(()=>{
 //     const loadData = async ()=>{
 //         const  [resUsers, resItem ] = await Promise.all([
-//              fetch ("http://localhost:3001/users/spittingUsers/"+id),
-//              fetch ("http://localhost:3001/spittingItems/"+id)
+//              fetch("http://localhost:3001/users/spittingUsers/"+id),
+//              fetch("http://localhost:3001/spittingItems/"+id)
 //         ])
 
 //         if (!resUsers.ok) throw new Error("Failed to fetch spitting users");

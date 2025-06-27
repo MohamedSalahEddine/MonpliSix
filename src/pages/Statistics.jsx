@@ -5,46 +5,105 @@ import StatisticsSet from '../components/StatisticsSet'
 
 export default function Statistics() {
 
-  const [all_time_goals, setAllTimeGoals] = useState([])
   const [last_game_goals, setLastGameGoals] = useState([])
+  const [all_time_goals, setAllTimeGoals] = useState([])
   const [avg_game_goals, setAvgGameGoals] = useState([])
+
+  const [last_game_ratings, setLastGameRatings] = useState([])
+  const [all_time_ratings, setAllTimeRatings] = useState([])
+  const [avg_game_ratings, setAvgGameRatings] = useState([])
+
+  const [all_time_wins, setAllTimeWins] = useState([])
+  const [avg_game_wins, setAvgGameWins] = useState([])
 
 
   useEffect(()=>{
     const loadData = async () => {
       const [
-              res_all_time_goals,
               res_last_game_goals,
+              res_all_time_goals,
               res_avg_game_goals,
+
+              res_last_game_ratings,
+              res_all_time_ratings,
+              res_avg_game_ratings,
+
+              res_all_time_wins,
+              res_avg_game_wins,
+
+
             ] = await Promise.all(
               [
-                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
+                //                     goals
                 // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
                 fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/goals"),
+                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
                 // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
                 fetch(process.env.REACT_APP_API_URL+"/stats/avggame/goals"),
 
+
+                //                     ratings
+                // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/ratings"),
+                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/ratings"),
+                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/ratings"),
+
+
+                // //                     wins
+                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/wins"),
+                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/wins"),
+
+
+                
+
               ]
             ) 
+
+
       const [
-        data_all_time_goals,
         data_last_game_goals,
+        data_all_time_goals,
         data_avg_game_goals,
+
+        data_last_game_ratings,
+        data_all_time_ratings,
+        data_avg_game_ratings,
+
+        data_all_time_wins,
+        data_avg_game_wins,
+
       ] = await  Promise.all([
-        res_all_time_goals.json(),
         res_last_game_goals.json(),
+        res_all_time_goals.json(),
         res_avg_game_goals.json(),
+
+        res_last_game_ratings.json(),
+        res_all_time_ratings.json(),
+        res_avg_game_ratings.json(),
+
+        res_all_time_wins.json(),
+        res_avg_game_wins.json(),
+
       ]) 
 
       
-      // console.log("all time", data_all_time_goals);
-      // console.log(data_last_game_goals);
-      // console.log(data_avg_game_goals);
-      
-      setAllTimeGoals(data_all_time_goals.data);
       setLastGameGoals(data_last_game_goals.data);
+      setAllTimeGoals(data_all_time_goals.data);
       setAvgGameGoals(data_avg_game_goals.data)
+
+      setLastGameRatings(data_last_game_ratings.data);
+      setAllTimeRatings(data_all_time_ratings.data);
+      setAvgGameRatings(data_avg_game_ratings.data)
+
+      setAllTimeWins(data_all_time_wins.data);
+      setAvgGameWins(data_avg_game_wins.data)
+
+
     }
     loadData()
   }, [])
@@ -58,14 +117,19 @@ export default function Statistics() {
         <div className='last_game flex-[.3] w-full bg-red-300 px-1 py-1 flex justify-evenly relative'>
           <span className='text-black text-sm absolute top-0 left-0'>Last Game</span>
           <StatisticsSet title={"buts"} set={last_game_goals}/>
+          <StatisticsSet title={"ratings"} set={last_game_ratings}/>
         </div>
         <div className='last_game flex-[.3] w-full bg-green-300 px-2 py-1 flex justify-evenly relative'>
           <span className='text-black text-sm absolute top-0 left-0'>All Time</span>
           <StatisticsSet title={"buts"} set={all_time_goals}/>
+          <StatisticsSet title={"rating"} set={all_time_ratings}/>
+          <StatisticsSet title={"wins"} set={all_time_wins}/>
         </div>
         <div className='last_game flex-[.3] w-full bg-blue-300 px-2 py-1 flex justify-evenly relative'>
           <span className='text-black text-sm absolute top-0 left-0'>Avg </span>
           <StatisticsSet title={"buts"} set={avg_game_goals}/>
+          <StatisticsSet title={"rating"} set={avg_game_ratings}/>
+          <StatisticsSet title={"wins"} set={avg_game_wins}/>
         </div>
         
 

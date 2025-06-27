@@ -1,44 +1,6 @@
 import { db } from "../db.js";
 
-const getAllTimeGoals = async (req, res) =>{
-    try{
-        const sql =   `(
-                            SELECT
-                                players.name,
-                                COUNT(goals.player_id) AS value
-                            FROM
-                                players INNER JOIN goals ON players.id = goals.player_id
-                            GROUP BY
-                                players.name
-                            ORDER BY 
-                                value  DESC
-                            LIMIT 3
-                        )
-                        UNION
-                        (
-                            SELECT
-                                
-                                players.name,
-                                COUNT(goals.player_id) AS value
-                            FROM
-                                players INNER JOIN goals ON players.id = goals.player_id
-                            GROUP BY
-                                players.name
-                            ORDER BY 
-                                value  ASC
-                            LIMIT 1
-                        )`
-        const [data] = await db.query(sql)
-        if (!data) return res.status(404).json({message : "no stats found"})
-        // console.log(res);
-        
-        return res.status(200).json({data})
-        
-    }catch(error){
-        console.log(error);
-        
-    }
-}
+
 
 const getLastGameGoals = async (req, res) =>{
     try{
@@ -65,6 +27,42 @@ const getLastGameGoals = async (req, res) =>{
 }
 
 
+const getAllTimeGoals = async (req, res) =>{
+    try{
+        const sql =   `(    SELECT
+                                players.name,
+                                COUNT(goals.player_id) AS value
+                            FROM
+                                players INNER JOIN goals ON players.id = goals.player_id
+                            GROUP BY
+                                players.name
+                            ORDER BY 
+                                value  DESC
+                            LIMIT 3
+                        )
+                        UNION
+                        (   SELECT
+                                players.name,
+                                COUNT(goals.player_id) AS value
+                            FROM
+                                players INNER JOIN goals ON players.id = goals.player_id
+                            GROUP BY
+                                players.name
+                            ORDER BY 
+                                value  ASC
+                            LIMIT 1
+                        )`
+        const [data] = await db.query(sql)
+        if (!data) return res.status(404).json({message : "no stats found"})
+        // console.log(res);
+        
+        return res.status(200).json({data})
+        
+    }catch(error){
+        console.log(error);
+        
+    }
+}
 
 const getAvgGameGoals = async (req, res) =>{
     try{
@@ -96,4 +94,100 @@ const getAvgGameGoals = async (req, res) =>{
     }
 }
 
-export {getAllTimeGoals, getLastGameGoals, getAvgGameGoals}
+
+
+
+
+const getLastGameRatings = async (req, res)=>{
+    const sql = `SELECT
+                    p.name,
+                    ROUND(AVG(r.rating), 1) as value
+                FROM
+                    players p
+                RIGHT JOIN ratings r ON
+                    p.id = r.rater_id
+                WHERE r.rated_id IN( SELECT tp.player_id FROM team_players tp WHERE tp.team_id IN (
+                        SELECT
+                            t.id
+                        FROM
+                            teams t
+                        WHERE
+                            t.game_id = ( SELECT MAX(id) FROM game )
+                    )
+                )
+                GROUP BY p.name
+                ORDER BY value DESC
+                LIMIT 3`
+    // const data = [
+    //     {name : "toko", value : 7.8},
+    //     {name : "tarek", value : 5.5},
+    //     {name : "nabil", value : 7.1},
+    // ]
+    try{
+        const [data] = await db.query(sql)
+        if(!data) return res.sattus(404).json({message : "no last game ratings found"})
+
+        return res.status(200).json({data})
+    }catch(error){
+        console.log("problem from server");      
+    }
+}
+const getAllTimeRatings = async (req, res)=>{
+     const sql = ``
+    const data = [
+        {name : "toko", value : 7.8},
+        {name : "tarek", value : 5.5},
+        {name : "nabil", value : 7.1},
+    ]
+    return res.status(200).json({data})
+
+}
+const getAvgGameRatings = async (req, res)=>{
+     const sql = ``
+    const data = [
+        {name : "toko", value : 7.8},
+        {name : "tarek", value : 5.5},
+        {name : "nabil", value : 7.1},
+    ]
+    return res.status(200).json({data})
+
+}
+
+
+
+
+const getAllTimeWins = async (req, res)=>{
+     const sql = ``
+    const data = [
+        {name : "toko", value : 17},
+        {name : "tarek", value : 15},
+        {name : "nabil", value : 14},
+    ]
+    return res.status(200).json({data})
+
+}
+const getAvgGameWins = async (req, res)=>{
+     const sql = ``
+    const data = [
+        {name : "toko", value : 67.3},
+        {name : "tarek", value : 60.1},
+        {name : "nabil", value : 55.6},
+    ]
+    return res.status(200).json({data})
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+export { getLastGameGoals, getAllTimeGoals, getAvgGameGoals, 
+         getLastGameRatings, getAllTimeRatings, getAvgGameRatings, 
+                            getAllTimeWins, getAvgGameWins}
