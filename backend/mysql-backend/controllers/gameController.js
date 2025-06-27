@@ -220,9 +220,35 @@ const getMVP = async (req, res) =>{
 }
 
 
-const endGame = async () =>{
-  console.log("ending game");
+const startGame = async (req, res) =>{
+  const sql =  `UPDATE game 
+                SET start_datetime = NOW()
+                WHERE id = (SELECT * from (SELECT MAX(game.id) from game) temp)`
+  try{
+    const [response] = await db.query(sql)
+    if(response.affectedRows === 0) return res.status(404).json({message: "no game found to update"})
+    return res.status(200).json({message : "game started"})
+  }catch(error){
+    console.error("error ", error);
+    res.status(500).json({message: "an internal problem occured when ending game"})
+  }
+}
+
+
+const endGame = async (req, res) =>{
+  const sql =  `UPDATE game 
+                SET end_datetime = NOW()
+                WHERE id = (SELECT * from (SELECT MAX(game.id) from game) temp)`
+  try{
+    const [response] = await db.query(sql)
+    if(response.affectedRows === 0) return res.status(404).json({message: "no game found to update"})
+    return res.status(200).json({message : "game over"})
+  }catch(error){
+    console.error("error ", error);
+    res.status(500).json({message: "an internal problem occured when ending game"})
+    
+  }
   
 }
 
-export {getAllGames, getGameById, addGame, score, getGamesHistory, getMVP, endGame}
+export {getAllGames, getGameById, addGame, score, getGamesHistory, getMVP, startGame, endGame}

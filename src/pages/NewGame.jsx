@@ -12,6 +12,7 @@ export default function NewGame() {
   const [teamA, setTeamA] = useState([])
   const [teamB, setTeamB] = useState([])
   const [draggedPlayer, setDraggedPlayer] = useState(null)
+  const [game_starting , setGameStarting] = useState(false)
   const [game_ending , setGameEnding] = useState(false)
   const [game_state, setGameState] = useState(()=>{
     return localStorage.getItem("game_state") || "preparing"
@@ -102,6 +103,7 @@ export default function NewGame() {
       // const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
       const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
       const data = await res.json()
+      console.log(res);
       
     }catch(error){
       console.log("error : "+error);
@@ -126,23 +128,59 @@ export default function NewGame() {
     
   }
 
+  const startGame = async()=>{
+    if(!window.confirm("you sure ? ")) return 
+    const token = localStorage.getItem("token")
+    setGameStarting(true)
+    try{
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/start_game",
+        {
+          method:"POST",
+          headers : {
+            "Content-Type":"application/json",
+            Authorization : `Bearer ${token}`
+          }
+        }
+      )
+      if(res.ok){
+        setGameState("on")
+      }
+    }catch(error){
+      console.error("problem starting the game: ", error);
+    }
+    finally{
+      setGameStarting(false)
+    }
+    
+  }
+
   const endGame = async ()=>{
     
     if(!window.confirm("are you sure ? ")) return
     const token = localStorage.getItem("token")
-    // const res = await fetch("https://monplisix.onrender.com/games/end_game", 
-    const res = await fetch(process.env.REACT_APP_API_URL+"/games/end_game", 
-      {
-        method :"POST",
-        headers : {
-          "Content-Type": "application/json",
-          "Authorization" :  `Bearer ${token}`
+    setGameEnding(true)
+    try{
+      // const res = await fetch("https://monplisix.onrender.com/games/end_game", 
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/end_game", 
+        {
+          method :"POST",
+          headers : {
+            "Content-Type": "application/json",
+            "Authorization" :  `Bearer ${token}`
+          }
         }
+      )
+      if(res.ok){
+        setGameState("preparing")
+        setTeamA([])
+        setTeamB([])
       }
-    )
-    setGameState("preparing")
-    setTeamA([])
-    setTeamB([])
+    }catch(error){
+      console.log("problem : ", error);
+      
+    }finally{
+      setGameEnding(false)
+    }
   }
 
 
@@ -161,19 +199,19 @@ export default function NewGame() {
             game_state === "preparing" &&
             <>
               <button disabled={teamA.length === 0 && teamB.length === 0 } onClick={handleAnnuler} className='btn rounded-lg px-4 bg-red-300'>annuler</button>
-              <button disabled={teamA.length < 5   || teamB.length < 5  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
+              <button disabled={teamA.length < 2   || teamB.length < 2  } onClick={handleConfirmer} className='btn rounded-lg px-4 bg-green-300'>confirmer</button>
             </>
           }
           {   
              game_state === "confirmed" &&
             <>
-              <button onClick={()=> setGameState("on")} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>start game</button>
+              <button disabled={game_starting} onClick={startGame} className='bg-green-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>{game_starting ? "Starting..." :"start game"}</button>
             </>
           }
           {   
              game_state === "on" &&
             <>
-              <button onClick={endGame} className='bg-red-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>end game</button>
+              <button disabled={game_ending} onClick={endGame} className='bg-red-300 w-[50%] py-2 text-gray-500 text-xl rounded-md'>{game_ending ? "Ending..." : "End Game"}</button>
             </>
           }
           
