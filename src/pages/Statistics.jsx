@@ -23,40 +23,33 @@ export default function Statistics() {
               res_last_game_goals,
               res_all_time_goals,
               res_avg_game_goals,
-
               res_last_game_ratings,
               res_all_time_ratings,
               res_avg_game_ratings,
-
               res_all_time_wins,
-              res_avg_game_wins,
-
+              res_avg_game_wins
 
             ] = await Promise.all(
               [
                 //                     goals
-                // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/goals"),
-                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
-                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/goals"),
-
-
+                fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/goals"),
+                fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
+                fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/avggame/goals"),
                 //                     ratings
-                // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/ratings"),
-                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/ratings"),
-                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/ratings"),
-
-
+                fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/ratings"),
+                fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/alltime/ratings"),
+                fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/avggame/ratings"),
                 // //                     wins
-                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/wins"),
-                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/wins"),
+                fetch("https://monplisix.onrender.com/stats/alltime/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/alltime/wins"),
+                fetch("https://monplisix.onrender.com/stats/avggame/goals"),
+                // fetch(process.env.REACT_APP_API_URL+"/stats/avggame/wins"),
 
 
                 
