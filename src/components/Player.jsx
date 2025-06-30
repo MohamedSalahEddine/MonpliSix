@@ -3,9 +3,9 @@ import React from 'react'
 export default function Player({player ={}, display_rating=true, size = 90, onClick}) {
   
   // console.log( "player :", player);
-  const { img, id, name, rating, selected  = false  } = player
+  const { img, id, name, rating, pos  } = player
   const img_src = img !==""? `/images/joueurs/${img}` : '/images/joueurs/camera-solid.svg'
-
+  
   
 
   function color_rating(){
@@ -27,16 +27,28 @@ export default function Player({player ={}, display_rating=true, size = 90, onCl
       return "bg-black "
     }
   }
+
+  function color_position(){
+    if(pos === "fr"){
+       return "border-red-400 border-4"
+    }
+    else if(pos === "df"){
+      return "border-green-400 border-4"
+    }
+    else if(pos === "ct"){
+      return "border-white-400 border-4"
+    }else{
+      return "border-black border-4"
+      
+    }
+  }
  
-
-  const shadow = selected ? "shadow-md shadow-green-400":""
-  // console.log(pad_x);
-
+  const border = display_rating && color_position()
 
   const cn = `player 
               flex flex-col items-center 
               cursor-pointer select-none rounded-full 
-              ${shadow} z-4`
+              z-4 ${border}`
   
 
   return (

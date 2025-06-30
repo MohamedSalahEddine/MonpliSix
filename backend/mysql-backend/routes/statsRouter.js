@@ -1,7 +1,7 @@
 import express from "express"
 
 import {getLastGameGoals,   getAllTimeGoals,   getAvgGameGoals, 
-        getLastGameRatings, getAllTimeRatings, getAvgGameRatings,
+        getLastGameRatings, getAllTimeRatings,
                             getAllTimeWins,    getAvgGameWins } from "../controllers/statsController.js"
 
 
@@ -15,7 +15,7 @@ statsRouter.get("/avggame/goals", getAvgGameGoals)
 
 statsRouter.get("/lastgame/ratings", getLastGameRatings)
 statsRouter.get("/alltime/ratings",  getAllTimeRatings)
-statsRouter.get("/avggame/ratings",  getAvgGameRatings)
+
 
 statsRouter.get("/alltime/wins",  getAllTimeWins)
 statsRouter.get("/avggame/wins",  getAvgGameWins)

@@ -5,7 +5,13 @@ import jwt from "jsonwebtoken"
 const getAllPlayers = async (req, res)=>{
     
     try{
-        const [players] = await db.query(`SELECT * FROM players INNER JOIN users on players.id = users.player_id`)
+        const [players] = await db.query(  `SELECT DISTINCT users.*, players.*
+                                            FROM users INNER JOIN players ON users.player_id = players.id
+                                            LEFT JOIN team_players ON players.id = team_players.player_id
+                                            LEFT JOIN teams ON team_players.team_id = teams.id
+                                            LEFT JOIN game ON teams.game_id = game.id
+
+                                            ORDER BY game.created_at DESC, players.pos, players.rating DESC`)
         if(players.length < 1) return res.status(400).json({message : "no players found"})
         return  res.status(200).json(players)
     }catch(error){
@@ -13,6 +19,16 @@ const getAllPlayers = async (req, res)=>{
     }
 }
 
+
+// SELECT * 
+// FROM users INNER JOIN players ON users.player_id = players.id
+// LEFT JOIN team_players ON players.id = team_players.player_id 
+// LEFT JOIN teams ON team_players.team_id = teams.id
+// LEFT JOIN game ON teams.game_id = game.id
+
+
+
+// SELECT users.*, players.*, game.created_at FROM users INNER JOIN players ON users.player_id = players.id LEFT JOIN team_players ON players.id = team_players.player_id LEFT JOIN teams ON team_players.team_id = teams.id LEFT JOIN game ON teams.game_id = game.id;
 
 
 const getPlayer = async (req, res)=>{

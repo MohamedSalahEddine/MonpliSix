@@ -98,14 +98,37 @@ const getAvgGameGoals = async (req, res) =>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const getLastGameRatings = async (req, res)=>{
+    
     const sql = `SELECT
                     p.name,
                     ROUND(AVG(r.rating), 1) as value
                 FROM
                     players p
                 RIGHT JOIN ratings r ON
-                    p.id = r.rater_id
+                    p.id = r.rated_id
                 WHERE r.rated_id IN( SELECT tp.player_id FROM team_players tp WHERE tp.team_id IN (
                         SELECT
                             t.id
@@ -118,11 +141,6 @@ const getLastGameRatings = async (req, res)=>{
                 GROUP BY p.name
                 ORDER BY value DESC
                 LIMIT 3`
-    // const data = [
-    //     {name : "toko", value : 7.8},
-    //     {name : "tarek", value : 5.5},
-    //     {name : "nabil", value : 7.1},
-    // ]
     try{
         const [data] = await db.query(sql)
         if(!data) return res.sattus(404).json({message : "no last game ratings found"})
@@ -132,26 +150,59 @@ const getLastGameRatings = async (req, res)=>{
         console.log("problem from server");      
     }
 }
+
+
 const getAllTimeRatings = async (req, res)=>{
-     const sql = ``
-    const data = [
-        {name : "toko", value : 7.8},
-        {name : "tarek", value : 5.5},
-        {name : "nabil", value : 7.1},
-    ]
-    return res.status(200).json({data})
+     const sql = `SELECT
+                    p.name,
+                    ROUND(AVG(r.rating), 1) as value
+                FROM
+                    players p
+                RIGHT JOIN ratings r ON
+                    p.id = r.rated_id
+               
+                GROUP BY p.name
+                ORDER BY value DESC
+                LIMIT 3`
+    try{
+        const [data] = await db.query(sql)
+        if(!data) return res.sattus(404).json({message : "no last game ratings found"})
+
+        return res.status(200).json({data})
+    }catch(error){
+        console.log("problem from server");      
+    }
 
 }
-const getAvgGameRatings = async (req, res)=>{
-     const sql = ``
-    const data = [
-        {name : "toko", value : 7.8},
-        {name : "tarek", value : 5.5},
-        {name : "nabil", value : 7.1},
-    ]
-    return res.status(200).json({data})
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -189,5 +240,5 @@ const getAvgGameWins = async (req, res)=>{
 
 
 export { getLastGameGoals, getAllTimeGoals, getAvgGameGoals, 
-         getLastGameRatings, getAllTimeRatings, getAvgGameRatings, 
+         getLastGameRatings, getAllTimeRatings, 
                             getAllTimeWins, getAvgGameWins}

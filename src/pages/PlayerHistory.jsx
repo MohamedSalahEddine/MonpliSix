@@ -64,10 +64,10 @@ export default function PlayerHistory() {
     const loadGames = async () => {
       try{
         const [resGames, resProfile] =  await Promise.all([
-          fetch("https://monplisix.onrender.com/games/gamesHistory/"+id),
-          // fetch(process.env.REACT_APP_API_URL+"/games/gamesHistory/"+id),
-          fetch("https://monplisix.onrender.com/players/profile/"+id),
-          // fetch(process.env.REACT_APP_API_URL+"/players/profile/"+id),
+          // fetch("https://monplisix.onrender.com/games/gamesHistory/"+id),
+          fetch(process.env.REACT_APP_API_URL+"/games/gamesHistory/"+id),
+          // fetch("https://monplisix.onrender.com/players/profile/"+id),
+          fetch(process.env.REACT_APP_API_URL+"/players/profile/"+id),
         ]) 
         const [dataGames, dataProfile] = await Promise.all([
           resGames.json(),

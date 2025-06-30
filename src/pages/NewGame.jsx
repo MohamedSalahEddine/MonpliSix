@@ -25,8 +25,8 @@ export default function NewGame() {
     
     const loadPlayers = async () => {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://monplisix.onrender.com/players", {
-        // const res = await fetch(process.env.REACT_APP_API_URL+"/players", {
+        // const res = await fetch("https://monplisix.onrender.com/players", {
+        const res = await fetch(process.env.REACT_APP_API_URL+"/players", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -80,8 +80,8 @@ export default function NewGame() {
     e.preventDefault()
     const token = localStorage.getItem("token")
     
-    const res = await fetch("https://monplisix.onrender.com/games",
-    // const res = await fetch(process.env.REACT_APP_API_URL+"/games",
+    // const res = await fetch("https://monplisix.onrender.com/games",
+    const res = await fetch(process.env.REACT_APP_API_URL+"/games",
       {
         method : "POST",
         headers : {
@@ -100,8 +100,8 @@ export default function NewGame() {
   const handlePlayerClickedA = async (player) => {
     
     try{
-      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
-      // const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      // const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
       const data = await res.json()
       console.log(res);
       
@@ -115,8 +115,8 @@ export default function NewGame() {
     try{
       
       console.log(player.name+" scored");
-      const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
-      // const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
+      // const res = await fetch("https://monplisix.onrender.com/games/score/"+player.id)
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/score/"+player.id)
       console.log(res);
       const data = await res.json()
 
@@ -133,8 +133,8 @@ export default function NewGame() {
     const token = localStorage.getItem("token")
     setGameStarting(true)
     try{
-      const res = await fetch("https://monplisix.onrender.com/games/start_game",
-      // const res = await fetch(process.env.REACT_APP_API_URL+"/games/start_game",
+      // const res = await fetch("https://monplisix.onrender.com/games/start_game",
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/start_game",
         {
           method:"POST",
           headers : {
@@ -161,8 +161,8 @@ export default function NewGame() {
     const token = localStorage.getItem("token")
     setGameEnding(true)
     try{
-      const res = await fetch("https://monplisix.onrender.com/games/end_game", 
-      // const res = await fetch(process.env.REACT_APP_API_URL+"/games/end_game", 
+      // const res = await fetch("https://monplisix.onrender.com/games/end_game", 
+      const res = await fetch(process.env.REACT_APP_API_URL+"/games/end_game", 
         {
           method :"POST",
           headers : {
