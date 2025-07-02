@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 const getAllPlayers = async (req, res)=>{
     
     try{
-        const [players] = await db.query(  `SELECT DISTINCT users.*, players.*
+        const [players] = await db.query(  `SELECT DISTINCT users.*, players.*, game.created_at
                                             FROM users INNER JOIN players ON users.player_id = players.id
                                             LEFT JOIN team_players ON players.id = team_players.player_id
                                             LEFT JOIN teams ON team_players.team_id = teams.id

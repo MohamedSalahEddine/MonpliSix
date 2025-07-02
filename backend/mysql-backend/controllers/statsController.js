@@ -208,24 +208,25 @@ const getAllTimeRatings = async (req, res)=>{
 
 
 const getAllTimeWins = async (req, res)=>{
-     const sql = ``
+    const sql = ``
     const data = [
         {name : "toko", value : 17},
         {name : "tarek", value : 15},
-        {name : "nabil", value : 14},
+        {name : "nabil", value : 14}
     ]
     return res.status(200).json({data})
-
 }
+
+
+
 const getAvgGameWins = async (req, res)=>{
      const sql = ``
     const data = [
         {name : "toko", value : 67.3},
         {name : "tarek", value : 60.1},
-        {name : "nabil", value : 55.6},
+        {name : "nabil", value : 55.6}
     ]
     return res.status(200).json({data})
-
 }
 
 
