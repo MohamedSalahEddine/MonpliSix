@@ -230,9 +230,19 @@ export default function NewGame() {
           >
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
-              teamA && teamA.length > 0 &&  teamA.map(player => (
+              teamA && teamA.length > 0 && teamA.map(player => (
                 <div
                   key={player.id}
+                  draggable
+                  onDragStart={(e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    setDraggedPlayer({
+                      ...player,
+                      from: "A",
+                      offsetX: e.clientX - rect.left,
+                      offsetY: e.clientY - rect.top
+                    });
+                  }}
                   onClick={() => handlePlayerClickedA(player)}
                   className='absolute'
                   style={{ left: player.x, top: player.y }}
@@ -241,6 +251,7 @@ export default function NewGame() {
                 </div>
               ))
             }
+
           </div>
           
           <div onDragEnd={handleDragEnd} className='team-B relative h-[34vh] flex flex-wrap' onDragOver={(e) => e.preventDefault()}
@@ -261,9 +272,19 @@ export default function NewGame() {
             >
             <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamB.length > 0 && (teamB.reduce((acc, player) => player.rating + acc, 0) / teamB.length).toFixed(1)}</span>
             {
-              teamB && teamB.length > 0 &&  teamB.map(player => (
+              teamB && teamB.length > 0 && teamB.map(player => (
                 <div
                   key={player.id}
+                  draggable
+                  onDragStart={(e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    setDraggedPlayer({
+                      ...player,
+                      from: "B",
+                      offsetX: e.clientX - rect.left,
+                      offsetY: e.clientY - rect.top
+                    });
+                  }}
                   onClick={() => handlePlayerClickedB(player)}
                   className='absolute'
                   style={{ left: player.x, top: player.y }}
@@ -272,6 +293,7 @@ export default function NewGame() {
                 </div>
               ))
             }
+
           </div>
           <div className='flex gap-2 h-fit overflow-y-hidden overflow-x-scroll scrollbar-hide py-3'>
             {
