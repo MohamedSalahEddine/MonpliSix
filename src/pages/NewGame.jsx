@@ -228,7 +228,7 @@ export default function NewGame() {
                           }
                         }}
           >
-            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avgggg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
+            <span className='bg-white m-1 h-fit rounded-full px-1 text-blue-600 text-xs font-bold'>avg : {teamA.length > 0 && (teamA.reduce((acc, player) => player.rating + acc, 0) / teamA.length).toFixed(1)}</span>
             {
               teamA && teamA.length > 0 &&  teamA.map(player => (
                 <div
