@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BottomMenu from '../components/BottomMenu'
 import StatisticsEntry from '../components/StatisticsEntry'
 import StatisticsSet from '../components/StatisticsSet'
+import BASE_URL from '../utils/url.js'
 
 export default function Statistics() {
 
@@ -32,23 +33,16 @@ export default function Statistics() {
             ] = await Promise.all(
               [
                 //                     goals
-                // fetch("https://monplisix.onrender.com/stats/lastgame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/goals"),
-                // fetch("https://monplisix.onrender.com/stats/alltime/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/goals"),
-                // fetch("https://monplisix.onrender.com/stats/avggame/goals"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/goals"),
+                fetch(BASE_URL+"/stats/lastgame/goals"),
+                fetch(BASE_URL+"/stats/alltime/goals"),
+                fetch(BASE_URL+"/stats/avggame/goals"),
                 //                     ratings
-                // fetch("https://monplisix.onrender.com/stats/lastgame/ratings"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/lastgame/ratings"),
-                // fetch("https://monplisix.onrender.com/stats/alltime/ratings"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/ratings"),
+                fetch(BASE_URL+"/stats/lastgame/ratings"),
+                fetch(BASE_URL+"/stats/alltime/ratings"),
 
                 // //                     wins
-                // fetch("https://monplisix.onrender.com/stats/alltime/wins"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/alltime/wins"),
-                // fetch("https://monplisix.onrender.com/stats/avggame/wins"),
-                fetch(process.env.REACT_APP_API_URL+"/stats/avggame/wins"),
+                fetch(BASE_URL+"/stats/alltime/wins"),
+                fetch(BASE_URL+"/stats/avggame/wins"),
 
 
                 
@@ -129,3 +123,34 @@ export default function Statistics() {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

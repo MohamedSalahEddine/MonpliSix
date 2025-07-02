@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SpittingItem from '../components/SpittingItem'
 import BottomMenu from '../components/BottomMenu'
 import { Link } from 'react-router-dom'
+import BASE_URL from '../utils/url'
 // import spitting_items from '../db_spitting_items.js'
 
 
@@ -12,8 +13,7 @@ export default function Spitting() {
 
   useEffect(()=>{
     const loadData = async ()=>{
-        // const  resItems = await fetch("https://monplisix.onrender.com/spittingItems")
-        const  resItems = await fetch(process.env.REACT_APP_API_URL+"/spittingItems")
+        const  resItems = await fetch(BASE_URL+"/spittingItems")
         if (!resItems.ok) throw new Error("Failed to fetch spitting Item");
         const dataItems = await resItems.json()
         setSpittingItem(dataItems)      

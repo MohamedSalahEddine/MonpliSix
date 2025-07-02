@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Player from './Player'
 
 import players from '../db_players'
+import BASE_URL from '../utils/url.js'
 
 
 
@@ -15,8 +16,7 @@ export default function GameHistory({game}) {
   useEffect(()=>{
     const loadData = async () =>{
       try{
-        // const res = await fetch("https://monplisix.onrender.com/games/mvp/"+mvp_id)
-        const res = await fetch(process.env.REACT_APP_API_URL+"/games/mvp/"+mvp_id)
+        const res = await fetch(BASE_URL+"/games/mvp/"+mvp_id)
         const data = await res.json()
         const {mvp} = data
         setMVP(mvp)

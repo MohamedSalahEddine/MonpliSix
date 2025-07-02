@@ -50,6 +50,7 @@ import Player from '../components/Player'
 import games from "../db_games"
 import GameHistory from '../components/GameHistory'
 import { Link, useParams } from 'react-router-dom'
+import BASE_URL from '../utils/url.js'
 
 
 
@@ -64,10 +65,8 @@ export default function PlayerHistory() {
     const loadGames = async () => {
       try{
         const [resGames, resProfile] =  await Promise.all([
-          // fetch("https://monplisix.onrender.com/games/gamesHistory/"+id),
-          fetch(process.env.REACT_APP_API_URL+"/games/gamesHistory/"+id),
-          // fetch("https://monplisix.onrender.com/players/profile/"+id),
-          fetch(process.env.REACT_APP_API_URL+"/players/profile/"+id),
+          fetch(BASE_URL+"/games/gamesHistory/"+id),
+          fetch(BASE_URL+"/players/profile/"+id),
         ]) 
         const [dataGames, dataProfile] = await Promise.all([
           resGames.json(),
