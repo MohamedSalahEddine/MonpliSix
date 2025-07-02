@@ -43,7 +43,7 @@ export default function Auth() {
         <form onSubmit={handleSubmit} action=""  className='auth flex flex-col items-center justify-center h-[60vh]  gap-3'>
           <input onChange={(e)=> setUsername( e.target.value ) } value={username} className=' pl-2 rounded-xl' type="text" placeholder='Prénom (ex : tarek) '/>
           <input onChange={(e)=> setPassword( e.target.value ) } value={password} className=' pl-2 rounded-xl' min={4} max={4} type="password" placeholder='Mot de passe (ex: 1234)'/>
-          <input className='rounded-full bg-green-400 text-white px-2 '  type="submit" value="Entroer" />
+          <input className='rounded-full bg-green-400 text-white px-2 '  type="submit" value="Entr" />
         </form>
         <p className='text-center text-red-400'>{message}</p>
     </div>
